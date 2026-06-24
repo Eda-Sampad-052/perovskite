@@ -1,0 +1,92 @@
+// Example of a SCAPS script file
+// Marc B. 24-8-2010, adapted 18-5-2011
+// you can use several markers for comments: //, or > or < , or ...
+
+// MB 19-12-2020: works as usual, when only addressing variables x, y, z, u, v, w and rundll scapsuserfunction
+// when you want to extend, and use more script variables a... z, you should use rundll scapsuserfunction26
+// ... and write something meaningfull in this dll: for the moment, as installed with SCAPS3.3.9, this dll is empty
+// ... and waits for the user to be written...
+
+set errorhandling.toscreen  // the default in a script is "overwrite file", this is SCAPSErrorLogFile.log in the scaps directory
+load definitionfile Numos Exercise 1.def
+
+// to start from a well defined condition
+clear all
+clear actions 
+action iv.doiv
+action iv.startV 0.0
+action iv.stopV 0.7
+action iv.increment 0.02
+action iv.stopaftervoc 1
+action light
+// the 6 action commands above could be replaced by one command loading an appropriate action file, as shown below
+// load actionlistfile actionlist CIGS.act
+
+set scriptvariable.mode 2              // means find a root (here Voc(Nt) = 0.5 V), the variable (here Nt) is of "logarithmic nature"
+set scriptvariable.yvalue 0.5000       // the desired value
+
+// three initial guesses of the parameter (only two are used)
+math filllogarithmic X 1E14 1E12 3 // sets xvector[0]=1E14, xvector[1]=1E13 and xvector[2]=1E12
+
+// a short loop to set the 3 initial guesses
+set scriptvariable.maxiteration 3 // in a loop, the counter will take values 0, 1, and 2
+loop start
+set layer1.defect1.ntotal xvector[loopcounter]   // assign the parameter to Nt
+calculate singleshot 
+get characteristics.voc  yvector[loopcounter]    // assign Voc to yvector  
+loop stop
+
+// take care of the estheatics of the output :-)
+set scriptvariable.xname Nt (1/cm3)
+set scriptvariable.yname Voc (V)
+set scriptvariable.zname |error| (V)
+
+// the main loop to find Nt that gives an exact Voc = 500 mV        
+loop maxiteration 6                   // do not exagerate
+loop maxerror     1e-5                 // do not exagerate
+
+loop start                             // start the iteration to find the root
+
+// Every user can make her/his own dll function
+// This one is be dellivered with SCAPS
+
+rundll scapsuserfunction               
+
+// it looks only to xvector and yvector [0] and [1] to find a better guess to make y = yvalue
+// the function returns xvalue as a better guess for the variable
+
+set layer1.defect1.ntotal xvalue     // uses the best guess for Nt          
+set scriptvariable.xvector xvalue   // places the best guess on top of xvector (and shifts the rest down)   
+
+calculate
+
+// places the new Voc in yvector[0] and pushes the rest up
+get characteristics.voc  yvector
+
+// you can comment the show command below out when it runs to your satisfaction       
+// show scriptvariables                   
+
+loop stop
+
+math constant ZYy // sets a Z vector with as many elements as Y, and with all elements = yvalue (= 0.5 V here)
+math vectorsubtract ZYZ // now Z contains the error acual Voc - desired Voc
+math vectorabs ZZ // now Z contains the absolute value |error|
+show scriptvariables                   
+
+plot draw xy // to show how SCAPS dwelled around to find the exact Voc
+plot drawversusindex Z // to show how the accuracy improves upon each iteration
+
+// save results.iv test save iv.iv         // when you want to save the last iv curve
+
+// now the value of Nt that has made Voc = 0.5 V is in the internal problem definition, not saved
+// you could find it safer to save the problem in a def file (now commented out)
+// save definitionfile script Voc test.def // when you want to save the definition file with the adapted Nt
+
+// set quitscript.interactiveSCAPS      // this is the default when leaving the script
+// set quitscript.quitSCAPS                   // you might prefer to leave SCAPS                       
+
+
+
+
+
+

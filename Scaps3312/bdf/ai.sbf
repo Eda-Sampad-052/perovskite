@@ -1,0 +1,128 @@
+> SCAPS 3.3.12 ELIS-UGent: Version scaps3312.exe, dated 07-10-2024, 11:45:28
+> SCAPS Batch Settings file, saved on 	24-06-2026 at 21:41:50
+> problem definition file loaded :
+> c:\Program Files (x86)\Scaps3312\def\default.scaps
+> last saved: 	12-05-2026 at 11:47:08
+> 
+
+batch display mode = not suppressed
+
+Batch parameter 0 :
+
+Label 1 : layer 1
+Label 2 : thickness
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   5.00000000e-02
+parameter   1:   1.00000000e-01
+
+Batch parameter 1 :
+
+Label 1 : layer 4
+Label 2 : thickness
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   5.00000000e-02
+parameter   1:   1.00000000e-01
+
+Batch parameter 2 :
+
+Label 1 : layer 2
+Label 2 : defect 1
+Label 3 : Nt total
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   1.00000000e+13
+parameter   1:   1.00000000e+15
+
+Batch parameter 3 :
+
+Label 1 : layer 2
+Label 2 : thickness
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   3.00000000e-01
+parameter   1:   5.00000000e-01
+
+Batch parameter 4 :
+
+Label 1 : layer 2
+Label 2 : ND
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   1.00000000e+17
+parameter   1:   1.00000000e+18
+
+Batch parameter 5 :
+
+Label 1 : layer 3
+Label 2 : thickness
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   3.00000000e-01
+parameter   1:   5.00000000e-01
+
+Batch parameter 6 :
+
+Label 1 : layer 3
+Label 2 : defect 1
+Label 3 : Nt total
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   1.00000000e+13
+parameter   1:   1.00000000e+15
+
+Batch parameter 7 :
+
+Label 1 : layer 3
+Label 2 : NA
+Label 3 : nihil
+Label 4 : nihil
+simultaneous :  0
+values from a list :  1
+logarithmic variation :  0
+values are file names :  0
+number of parameters :    2
+list of parameters saved :  0
+parameter   0:   1.00000000e+14
+parameter   1:   1.00000000e+15

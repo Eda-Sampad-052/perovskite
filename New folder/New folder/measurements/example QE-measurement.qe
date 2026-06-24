@@ -1,0 +1,57 @@
+This is an example file with a QE-measurement
+SCAPS accepts two possible formats for such a file:
+
+1) the outputfile with extension .qe made by SCAPS when clicking the "save" button in the QE-panel
+(this is then a simulation rather than a measurement)
+
+2) a general measurement file produced by the measurement system of a user. 
+SCAPS has a few rules to accept and interpret these files:
+- if the first line contains the word SCAPS, the file is treated as an output file produced by SCAPS
+- if the first line contains the words MIA or SPECTRUM, the file is treated as an output file produced by MIA (Measure It All, the measurement environment of ELIS/UGent)
+- if the first line contains neither "SCAPS" nor "MIA", the file is treated as a general measurement file, and the following rules apply:
+
+- every line until the first data line is discarded, unless it is a "units" statement.
+- a data line is a line starting with two or more numbers, separated by spaces or tabs
+- the first number is interpreted as the wavelength, the second as the QE (units: see below); possible further numbers are discarded
+- after the first data line is met, processing stops 
+         -  at the first empty line 
+         - or when the max. number of datalines is read, at present this is 500 (18-8-2005)
+         - or at the end of the measurement file
+
+- just below is an example of a "unit" statement (to be placed before the first data line)
+units: lambda: m    QE: 1
+("units" tells SCAPS that it is a units-statement; "lambda:" is followed by the units of the wavelength: m, can be preceeded by a decimal prefix (e.g. cm, mm, µm or um, nm); "QE:" is followed by the units of QE (e.g. nothing, or "1", or "%"); the order of "Iambda:" and "QE:" is free; if no units statement encountered, or no "lambda:", or no "QE:", the defaults are assumed: nm for lambda and % for QE).
+
+3.00E-07	0.7203165
+3.20E-07	0.7361162
+3.40E-07	0.7761602
+3.60E-07	0.8501813
+3.80E-07	0.9069981
+4.00E-07	0.9379227
+4.20E-07	0.9565006
+4.40E-07	0.9690424
+4.60E-07	0.9776608
+4.80E-07	0.9866959
+5.00E-07	0.9955548
+5.20E-07	0.9940883
+5.40E-07	0.9914108
+5.60E-07	0.9881428
+5.80E-07	0.9843657
+6.00E-07	0.980316
+6.20E-07	0.9760682
+6.40E-07	0.9711957
+6.60E-07	0.9655917
+6.80E-07	0.9594308
+7.00E-07	0.9491923
+7.20E-07	0.9359845
+7.40E-07	0.9235057
+7.60E-07	0.9152749
+7.80E-07	0.9004468
+8.00E-07	0.8888303
+8.20E-07	0.8711956
+8.40E-07	0.8539187
+8.60E-07	0.8144556
+8.80E-07	0
+9.00E-07	0
+
+Possible comments (or more data) after the empty line above are discarded

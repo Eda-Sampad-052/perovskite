@@ -1,0 +1,30 @@
+> SCAPS 3.2.00 ELIS-UGent: Version scaps3200.exe dated 29-05-2012, 10:02:53
+> SCAPS Material parameters file, saved on 	29-05-2012 at 10:21:50
+> problem definition file loaded :
+> c:\Users\Koen Decock\Desktop\brol.def
+> last saved: 	29-05-2012 at 10:18:18
+> 
+> :18
+> 
+> Example material for a mixture of CuInSe2 (material A) and CuGaSe2 (material B)
+
+v_th_n :	 1.000e+07	 1.000e+07	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+07	 1.000e+07	 0	 0	[m/s]
+v_th_p :	 1.000e+07	 1.000e+07	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+07	 1.000e+07	 0	 0	[m/s]
+eps :	    12.000000	    12.000000	    10.000000	    10.000000	    10.000000	    12.000000	    12.000000	 0	 0	[-]
+chi :	  4.300000	  3.660000	 -0.150000	  1.000000	  1.000000	  4.300000	  3.660000	 2	 0	[eV]
+Eg :	  1.040000	  1.680000	  0.150000	  1.000000	  1.000000	  1.040000	  1.680000	 2	 0	[eV]
+Nc :	 1.000000e+19	 1.000000e+19	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+19	 1.000000e+19	 0	 0	[/m^3]
+Nv :	 1.000000e+19	 1.000000e+19	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+19	 1.000000e+19	 0	 0	[/m^3]
+mu_n :	 1.000000e+02	 1.000000e+02	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e+02	 1.000000e+02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e+01	 2.500000e+01	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.500000e+01	 2.500000e+01	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+absorption grading :	 1192.29	  738.08	  300.00	  380.00	    0.00	    0.00	    0.00	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CISMoeller.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CGS Alonso.abs

@@ -1,0 +1,9 @@
+/ grey filter, 82% transmission
+/ used by Peter N., doctorate Ch 7
+/ if used at the illuminated side: the data are interpreted as transmission
+/ if used at the rear side       : the data are interpreted as reflection
+/lambda[nm]	transmission[%]
+1	82
+500	82
+501	82
+10000	82

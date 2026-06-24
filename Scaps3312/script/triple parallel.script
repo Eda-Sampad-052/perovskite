@@ -1,0 +1,53 @@
+//SCAPS SCRIPT
+//THIS SCRIPT CALCULATES THE IV CURVE OF THE SERIES CONNECTION OF TWO CELLS
+
+//SETTING THE STARTING CONDITIONS
+clear all
+clear actions
+action light
+action iv.startv 0
+action iv.stopv 5.0
+action iv.increment 0.02
+action iv.checkaction
+action iv.stopaftervoc
+
+//cell 1
+load definitionfile Cs2GeSnBr6.def
+calculate singleshot
+get iv zu
+
+//cell 2
+load definitionfile Na2CuSbBr6.def
+calculate singleshot
+get iv vw
+
+//cell 3
+load definitionfile  CsBi3I10.def
+calculate singleshot
+get iv kl
+
+//calculate the IV of the series connection
+math parallel xyzuvw nz
+math parallel abxykl cd
+
+
+//visualize the results
+plot draw zu
+plot draw vw
+plot draw kl
+plot draw ab
+
+
+math characteristics.all cab
+math characteristics.voc Xab
+math characteristics.jsc yab
+math characteristics.ff zab
+math characteristics.eta uab
+math characteristics.vmpp vab
+math characteristics.jmpp wab
+
+show scriptvariables
+
+
+
+

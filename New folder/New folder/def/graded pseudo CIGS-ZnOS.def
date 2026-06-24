@@ -1,0 +1,189 @@
+> SCAPS version 2.8.02, 18 may 2009, ELIS - UGent: Problem definition file
+> last saved by SCAPS: 	21-05-2009 at 22:15:02
+> 
+> 
+> Problem definitin file distributed with SCAPS 2.8, may 2009
+> This file is not meant to simulate any real or realistic solar cell.
+> It is just to illustrate some of the new features in SCAPS2.8
+> The "CIGS" layer has an In-Ga grading with Ga grading towards the contact and towards the interface
+> The band gap grading is attributed completely to a grading of the conduction band (common anion rule), 
+> by giving the electron affinity Chi a grading opposite to that of the band gap Eg.
+> The "ZnOS" layer has an O-S grading towards the front contact. 
+> As there is no electron affinity grading in this ZnOS layer, the Eg grading is completely in the valence band (common cation rule).
+> The optical absorption constants have been extrapolated out of their tabulated range
+> for the purpose of illustrating the grading properties of alpha(lambda)
+> 
+convergence
+
+clamp_psi :  5.00e-01 units kT
+clamp_n :  5.00e-01 units kT
+clamp_p :  5.00e-01 units kT
+termination_psi :  1.00e-03 units kT
+termination_Fn :  1.00e-03 units kT
+termination_Fp :  1.00e-03 units kT
+maxiter :   250
+QE calculation mode:  1 (0: cst. # of photons, 1: cst. incident power)
+number of photons :  1.00e+16
+incident power :  1.00e+03
+recalculate mesh :  0 (0: fixed mesh, 1: adaptive mesh)
+maximum ratio between neighbouring points :  1.60e+00
+minimum ratio between neighbouring points :  1.05e+00
+generation limit :  1.00e+00 microA/cm2
+recombination limit :  1.00e-03 microA/cm2
+Mott-Schottky analysis epsilon of sheet # :  1
+Mott-Schottky analysis epsilon of sheet side : -1	(left side = -1; right side = +1)
+Mott-Schottky analysis number of points :  3	(3 or 5 as of december 2008)
+Mott-Schottky analysis polynomial order middle :  2	(1 or 2 as of december 2008)
+Mott-Schottky analysis polynomial order edges:  1	(1 or 2 as of december 2008)
+
+
+back contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn :  1.000e+02 [m/s]
+Sp :  1.000e+05 [m/s]
+optical filter : reflection
+wavelength independent: 1
+filter value: 8.00000000e-01
+
+layer
+
+name : graded p-CIGS
+d : 1.000e-06 [m]
+composition grading :	  0.40000	  0.40000	  0.10000	  0.20000	  0.05000	  0.40000	  0.40000	4	1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+eps :	    13.600000	    13.600000	    13.600000	     1.000000	     1.000000	    13.600000	    13.600000	0	0	[-]
+chi :	  4.500000	  3.850000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	0	0	[eV]
+Eg :	  1.000000	  1.650000	  0.400000	  0.900000	  1.000000	  1.164000	  1.164000	2	0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	0	0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	0	0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	0	0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	0	0	[m^2/Vs]
+Na(y) :	 2.000000e+22	 2.000000e+22	 2.000000e+22	 1.000000e+00	 1.000000e+00	 2.000000e+22	 2.000000e+22	0	0	[/m^3]
+Nd(y) :	 1.000000e+07	 1.000000e+07	 1.000000e+07	 1.000000e+00	 1.000000e+00	 1.000000e+07	 1.000000e+07	0	0	[/m^3]
+absorption grading :	 1239.98	  751.50	  470.00	  380.00	    0.00	    0.00	    0.00	7	0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CIS Moeller.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CGS Alonso.abs
+
+srhrecombination
+
+type : neutral
+sigma_n : 5.000e-17 [m^2]
+sigma_p : 1.000e-19 [m^2]
+energy distribution : uniform
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Et :   0.300 [eV]
+Ekar :  0.1000 [eV]
+Nt(x) :	 8.862e+18	 8.862e+18	 8.862e+18	 1.000e+00	 1.000e+00	 1.000e+20	 1.000e+20	0	1	[1/cm3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+21 [/m^3 eV]
+Nright : 1.000e+21 [/m^3 eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00
+Relative hole mass :  1.00
+
+
+layer
+
+name : n-CdS
+d : 1.000e-08 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  1.00000	0	1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	0	0	[-]
+chi :	  4.200000	  4.200000	  4.200000	  1.000000	  1.000000	  4.200000	  4.200000	0	0	[eV]
+Eg :	  2.400000	  2.400000	  2.400000	  1.000000	  1.000000	  2.400000	  2.400000	0	0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	0	0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	0	0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	0	0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	0	0	[m^2/Vs]
+Na(y) :	 1.000000e+06	 1.000000e+06	 1.000000e+06	 1.000000e+00	 1.000000e+00	 1.000000e+06	 1.000000e+06	0	0	[/m^3]
+Nd(y) :	 1.000000e+22	 1.000000e+23	 1.000000e+23	 1.000000e+00	 1.000000e+00	 1.000000e+22	 1.000000e+22	0	0	[/m^3]
+absorption grading :	  516.66	  516.66	  250.00	  250.00	  250.00	    1.20	    1.20	7	0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : Numos CdS.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : Numos CdS.abs
+
+srhrecombination
+
+type : neutral
+sigma_n : 1.000e-17 [m^2]
+sigma_p : 1.000e-17 [m^2]
+energy distribution : gauss
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Et :   1.200 [eV]
+Ekar :  0.1000 [eV]
+Nt(x) :	 8.862e+22	 8.862e+22	 8.862e+22	 1.000e+00	 1.000e+00	 8.862e+22	 8.862e+22	0	1	[1/cm3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+24 [/m^3 eV]
+Nright : 1.000e+24 [/m^3 eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00
+Relative hole mass :  1.00
+
+
+layer
+
+name : graded n-Zn(O,S)
+d : 2.000e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  1.00000	1	1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	0	0	[m/s]
+eps :	     9.000000	     9.000000	     9.000000	     1.000000	     1.000000	     9.000000	     9.000000	0	0	[-]
+chi :	  4.450000	  4.450000	  4.450000	  1.000000	  1.000000	  4.450000	  4.450000	0	0	[eV]
+Eg :	  3.300000	  3.600000	  0.400000	  1.000000	  1.000000	  3.300000	  3.600000	2	0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	0	0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	0	0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	0	0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	0	0	[m^2/Vs]
+Na(y) :	 1.000000e+06	 1.000000e+06	 1.000000e+06	 1.000000e+00	 1.000000e+00	 1.000000e+06	 1.000000e+06	0	0	[/m^3]
+Nd(y) :	 1.000000e+23	 1.000000e+23	 1.000000e+24	 1.000000e+00	 1.000000e+00	 1.000000e+23	 1.000000e+23	0	0	[/m^3]
+absorption grading :	  375.75	  344.44	  250.00	  250.00	    0.00	    0.00	    0.00	7	0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : ZnO extrapolated.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : ZnS extrapolated.abs
+
+srhrecombination
+
+type : neutral
+sigma_n : 1.000e-16 [m^2]
+sigma_p : 1.000e-16 [m^2]
+energy distribution : gauss
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Et :   1.650 [eV]
+Ekar :  0.1000 [eV]
+Nt(x) :	 8.862e+21	 8.862e+21	 8.862e+21	 1.000e+00	 1.000e+00	 1.000e+22	 1.000e+22	0	1	[1/cm3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.128e+23 [/m^3 eV]
+Nright : 1.128e+23 [/m^3 eV]
+
+
+front contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+02 [m/s]
+
+working point
+
+illuminated from : right
+internal Rfront :   0.00000000
+internal Tfront :  1.0000e+00

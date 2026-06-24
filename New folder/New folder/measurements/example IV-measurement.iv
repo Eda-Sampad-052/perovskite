@@ -1,0 +1,66 @@
+This is an example file with an IV-measurement
+SCAPS accepts two possible formats for such a file:
+
+1) the outputfile with extension .iv made by SCAPS when clicking the "save" button in the IV-panel
+(this is then a simulation rather than a measurement; the cell area is assumed to be 1 cm2)
+
+2) a general measurement file produced by the measurement system of a user. 
+SCAPS has a few rules to accept and interpret these files:
+- if the first line contains the word SCAPS, the file is treated as an output file produced by SCAPS
+- if the first line contains the word MIA, the file is treated as an output file produced by MIA (Measure It All, the measurement environment of ELIS/UGent)
+- if the first line contains neither "SCAPS" nor "MIA", the file is treated as a general measurement file, and the following rules apply:
+
+- every line until the first data line is discarded, unless it is a "units" or an "area" statement.
+- a data line is a line starting with two or more numbers, separated by spaces or tabs
+- the first number is interpreted as the voltage, the second as the current (units: see below); possible further numbers are discarded
+- after the first data line is met, processing stops 
+         -  at the first empty line 
+         - or when the max. number of datalines is read, at present this is 500 (18-8-2005)
+         - or at the end of the measurement file
+
+- just below is an example of an "area" statement (to be placed before the first data line)
+cell area: 3.14 cm2
+("cell area" tells SCAPS that it is an area statement ("area" will also do); "3.14" is read as the value; the first character after the value, here "c" is interpreted as a decimal prefix (you could write m2, cm2, mm2, ... ); if no area statement encountered, A = 1 cm2 is assumed).
+
+- just below is an example of a "unit" statement (to be placed before the first data line)
+units: I: A    V: V
+("units" tells SCAPS that it is a units-statement); "I:" is followed by the units of the current: A, can be preceeded by a decimal prefix (e.g. mA. µA or uA, nA, pA); "V:" is followed by the units of voltage: Volt, can be preceeded by a decimal prefix (e.g. mV); the order of "I:" and "V:" is free; if no units statement encountered, or no "I:", or no "V:", the defaults are assumed: mA for I and Volt for V).
+
+-0.8	-7.62E-02	
+-0.75	-7.62E-02	
+-0.7	-7.61E-02	
+-0.65	-7.61E-02	
+-0.6	-7.61E-02	
+-0.55	-7.61E-02	
+-0.5	-7.60E-02	
+-0.45	-7.60E-02
+-0.4	-7.60E-02
+-0.35	-7.59E-02
+-0.3	-7.59E-02
+-0.25	-7.58E-02
+-0.2	-7.58E-02
+-0.15	-7.57E-02
+-0.1	-7.57E-02
+-0.05	-7.56E-02
+0	-7.56E-02
+0.05	-7.55E-02
+0.1	-7.54E-02
+0.15	-7.54E-02
+0.2	-7.53E-02
+0.25	-7.52E-02
+0.3	-7.51E-02
+0.35	-7.50E-02
+0.4	-7.48E-02
+0.45	-7.47E-02
+0.5	-7.45E-02
+0.55	-7.42E-02
+0.6	-7.38E-02
+0.65	-7.29E-02
+0.7	-7.09E-02
+0.75	-6.63E-02
+0.8	-5.52E-02
+
+Possible comments (or further data) after the empty line above are discarded
+
+
+

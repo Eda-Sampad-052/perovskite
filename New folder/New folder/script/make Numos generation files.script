@@ -1,0 +1,48 @@
+// SCAPS script
+// MB june 2015
+// loads Numos CIGS baseline and a (very fine) white spectrum
+// scan the wavelength range in a batch job: set spectrumcut-off, and very simultaneously short lambda and long lambda (they differ by 10 nm here)
+// assemble and save for each wavelength a generation file in SCAPS format (a .gen file)
+// as a bonus, make a graph of |Jsc| at each wavelength (this should (but a scale factor) equal the QE, when a white spectrum was used)
+
+clear all
+clear actions
+ 
+action light 
+action spectrumcutoff.on 
+
+set scriptvariable.maxiteration 86
+load definitionfile Numos CIGS baseline.def
+action spectrumfile very fine isophotonic 200-2000 nm.spe
+
+//show scriptvariables 
+
+set scriptvariable.xname lambda (nm)
+set scriptvariable.yname short cutoff (nm)
+set scriptvariable.zname long cutoff (nm)
+set scriptvariable.wname |J| (mA/cm2)
+
+math filllinear.fixednumberofpoints X 300 1150 maxiteration
+math filllinear.fixednumberofpoints Y 295 1145 maxiteration
+math filllinear.fixednumberofpoints Z 305 1155 maxiteration
+math fillconstant W 0 maxiteration
+
+//show scriptvariables 
+
+loop start
+
+action spectrumcutoff.shortlambda yvector[loopcounter]
+action spectrumcutoff.longlambda zvector[loopcounter] 
+calculate singleshot 
+save results.scapsgenerationfile.filenamelist c:\Marc\scaps\Numos gen files\Numos genfilelist.txt[loopcounter] 
+// the file Numos genfilelist.txt contains the filenames of the gen files that are to be saved
+get energybands.jtotal_scalar wvector[loopcounter]
+// show scriptvariables 
+
+loop stop
+
+math vectorabs ww
+plot xw
+
+
+

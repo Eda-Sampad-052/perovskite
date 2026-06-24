@@ -1,0 +1,63 @@
+Test file filegrading MB, 30-8-2013
+Example of a grading file for a property graded as a function of position
+gives position x in the first column, ABSOLUTE POSITION IN MICROMETER
+gives composition y in the second column
+In this example: composition(x) = 0.1 + 0.1*sin(5.5*pi*(x/micrometer))
+points at x=-0.2 and x=+1.02 micrometer added to control extrapolation
+position: absolute    (this is the key word for SCAPS)
+interpolation: linear  (this is the key word for SCAPS)
+
+x (micrometer)	composition
+-0.02	0.10000
+0.00	0.10000
+0.02	0.13387
+0.04	0.16374
+0.06	0.18607
+0.08	0.19823
+0.10	0.19877
+0.12	0.18763
+0.14	0.16613
+0.16	0.13681
+0.18	0.10314
+0.20	0.06910
+0.22	0.03871
+0.24	0.01557
+0.26	0.00241
+0.28	0.00079
+0.30	0.01090
+0.32	0.03155
+0.34	0.06029
+0.36	0.09372
+0.38	0.12790
+0.40	0.15878
+0.42	0.18271
+0.44	0.19686
+0.46	0.19956
+0.48	0.19048
+0.50	0.17071
+0.52	0.14258
+0.54	0.10941
+0.56	0.07513
+0.58	0.04379
+0.60	0.01910
+0.62	0.00397
+0.64	0.00020
+0.66	0.00822
+0.68	0.02710
+0.70	0.05460
+0.72	0.08747
+0.74	0.12181
+0.76	0.15358
+0.78	0.17902
+0.80	0.19511
+0.82	0.19995
+0.84	0.19298
+0.86	0.17501
+0.88	0.14818
+0.90	0.11564
+0.92	0.08126
+0.94	0.04910
+0.96	0.02295
+0.98	0.00591
+1.00	0.00000
+1.02	0.00000

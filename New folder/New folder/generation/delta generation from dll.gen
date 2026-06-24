@@ -1,0 +1,10 @@
+> Generation file made by SCAPSUserFunction() in SCAPSdll.c
+> Total generation =   6.2500e+17 photons/cm2/s corresponding to   1.0000e+02 mA/cm2
+> Generation as a delta function centered at x =      2.3000 µm
+> Delta function approximated by rectangle with height   1.5625e+22 photons/cm3/s and half width  0.2000 µm
+> x (µm)	G(#/m3/s)
+0.0	0.0
+ 2.0990	0.0
+ 2.1000	  1.5625e+28
+ 2.5000	  1.5625e+28
+ 2.5010	0.0

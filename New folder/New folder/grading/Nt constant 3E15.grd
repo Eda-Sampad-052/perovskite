@@ -1,0 +1,14 @@
+Test file filegrading MB, 31-8-2013
+Example of a grading file for a property graded as a function of composition or position
+Can be used for a defect density Nt(y) or Nt(x)
+The first column can be the composition (when e.g. NA(y) is set in SCAPS) or the position in micrometer (when NA(x) is set in SCAPS)
+The second column is a defect density in 1/m3
+In this example: Nt(x) =  1.0E21 /m3 =  3.0E+15 /cm3, thus a constant (to compare this Nt from file with a constant Nt set in SCAPS)
+
+Interpolation: logarithmic  (this is the key word for SCAPS)
+Thickness: relative    (this is the key word for SCAPS)
+
+x/d [-]	Nt (1/m3)
+0.00	3.0E+21
+0.50	3.0E+21
+1.00	3.0E+21

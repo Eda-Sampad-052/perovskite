@@ -1,0 +1,97 @@
+// SCAPS script
+// Marc B., ELIS - UGent 22-1-2025
+// will work with traditional SCAPS versions alo
+// determine the Voc of a cell with (much) better accuracy than the standard SCAPS method
+// that standard method is: do one single IV simulation, and interpollate linearly around the Voc point
+// the algorithm used here is a simplified version of Newton-Raphson:
+// the derivative dJ/dV is determined once numerically by the dedicated script command
+// and is kept constant, thus not updated during the iteration process
+
+clear all
+clear actions
+// set actions for a standard IV simulation
+action light
+action iv.startv 0.0
+action iv.stopv 0.8
+action iv.increment 0.02
+action iv.stopaftervoc 
+action iv.doiv
+action workingpoint.voltage 0.0
+
+load definitionfile simple pn.def
+
+// initialisations
+set scriptvariable.maxiteration 20
+math fillconstant v 0 maxiteration // to store successive estimates of Voc
+math fillconstant j 0 maxiteration // to store the current at estimated Voc
+math fillconstant d 0 maxiteration // to store corrections to Voc
+math fillconstant a 0 maxiteration // to store dJ/dV of preliminar IV calculation
+
+set scriptvariable.name.vvector Voc (Volt)
+set scriptvariable.name.jvector J(Voc) (mA/cm2)
+set scriptvariable.name.dvector dVoc (Volt)
+set scriptvariable.name.avector dJ/dV (mA/cm2/V)
+// names of uvector and ivector will be set automatically by the get command
+
+set scriptvariable.name.vvalue Voc (Volt)
+set scriptvariable.name.jvalue J(Voc) (mA/cm2)
+set scriptvariable.name.dvalue dVoc (Volt)
+set scriptvariable.name.gvalue g (mA/cm2/V) // the conductance g = dJ/dV around Voc
+
+calculate singleshot // preliminar IV simulation
+get iv ui // place the result in uvector (for V) and ivector (for J)
+get characteristics.voc vvalue
+
+action iv.checkaction 0 // dont do full IV simulations no more
+
+// instead, do a workpoint simulation at the estimated Voc
+action workingpoint.voltage vvalue 
+calculate singleshot 
+get energybands.jtotal_scalar jvalue // the current density at that estimated Voc
+
+math differentiate aui // set dvector = dJ/dV = d(ivector)/d(uvector) (element per element)
+set scriptvariable.gvalue avector[last] // get the derivative in the end point of the V-range
+math scalardivide djg // the (negative of) the Newton-Raphson correction to Voc
+math scalarchange_sign dd // the Newton-Raphson correction is now in dvalue
+// show scriptvariables 
+
+loop start
+
+set scriptvariable.vvector[loopcounter] vvalue
+set scriptvariable.jvector[loopcounter] jvalue
+set scriptvariable.dvector[loopcounter] dvalue
+
+math scalaradd vvd // increment the Voc estimate // the new Voc
+action workingpoint.voltage vvalue // and set the work point voltage to that
+// calculate j at this new workpoint
+calculate singleshot // at working point 
+get energybands.jtotal_scalar jvalue // the new j at new estimate of Voc
+
+math scalardivide djg // the (negative of) the Newton-Raphson correction to Voc
+math scalarchange_sign dd // the Newton-Raphson correction is now in dvalue
+
+loop stop
+
+plot drawversusindex v
+plot drawversusindex j
+plot drawversusindex d
+// action workingpoint.voltage 0.0
+show scriptvariables
+
+// when viewing these graphs, take profit of the new "absolute value"-button
+// placed on the Script Plot Panel 
+
+// ... and then ones sees that Voc = 0.739 723 894 365... Volt
+// giving a current density J = 4E-9 mA/cm2 = 4 pA/cm2, or about 1E-10 of Jsc...
+// (however, do not trust all this "accuracy" too much...)
+// this method gives the same result (to many decimals!) as the
+// "childish method" of stepping to Voc (see step to Voc.script)
+// but is much faster (10 steps only; even with 5 step a very, very decent accuracy)
+// 
+// this does not use the new if-commands in the script; it uses the good old differentiate command
+
+
+
+
+
+

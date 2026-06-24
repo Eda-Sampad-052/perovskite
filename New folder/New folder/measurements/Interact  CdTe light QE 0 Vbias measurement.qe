@@ -1,0 +1,77 @@
+Interact Summer Academy - Berlin					
+Workshop Sim4 on SCAPS-simulations (Marc Burgelman, friday 2 september 2005)					
+illuminated QE-"measurement"	at zero voltage bias			
+(the measurement is a simulation with problem definition file "Interact CdTe measurements.def")					
+cell area: 1 cm2					
+units: lambda: nm; QE: %					
+measurement conditions:					
+T(K)	300				
+V(V)	0 Volt (no voltage bias)				
+f(MHz)	n.a.				
+illumination:	1 sun AM1.5G (light bias)				
+Neutral density filters: none					
+spectrum cut off:	none
+
+lambda (nm)	QE (%)
+
+300.0	2.593
+310.0	3.112
+320.0	3.670
+330.0	8.040
+340.0	13.291
+350.0	19.777
+360.0	24.789
+370.0	27.521
+380.0	30.105
+390.0	31.340
+400.0	32.556
+410.0	34.734
+420.0	36.915
+430.0	38.197
+440.0	39.482
+450.0	41.691
+460.0	43.879
+470.0	46.680
+480.0	49.405
+490.0	55.311
+500.0	60.526
+510.0	68.209
+520.0	73.446
+530.0	81.545
+540.0	82.388
+550.0	82.622
+560.0	82.508
+570.0	82.363
+580.0	82.230
+590.0	82.135
+600.0	82.025
+610.0	81.947
+620.0	81.705
+630.0	81.394
+640.0	80.955
+650.0	80.581
+660.0	80.037
+670.0	79.347
+680.0	78.649
+690.0	77.898
+700.0	77.076
+710.0	76.582
+720.0	75.905
+730.0	75.198
+740.0	74.597
+750.0	73.981
+760.0	73.125
+770.0	72.313
+780.0	69.675
+790.0	67.340
+800.0	62.389
+810.0	53.831
+820.0	43.428
+830.0	31.933
+840.0	10.312
+850.0	0.718
+860.0	0.000
+870.0	0.000
+880.0	0.000
+890.0	0.000
+900.0	0.000

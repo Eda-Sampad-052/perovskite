@@ -1,0 +1,13 @@
+# this is an example file containing optical capture data, to be used in SCAPS for IPV calculations
+#
+# the first column contains the wavelenght of incoming light in nm
+# the second column contains the optical capture cross section of one defect in m^2
+# for wavelengths outside the specified interval, the optical capture cross section is taken as zero
+#
+# lambda[nm]  sigma[m^2]
+1108	7.77e-22
+1200	4.44e-22
+1240	1.11e-22
+1320	5.55e-23
+1330	0.0
+

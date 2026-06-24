@@ -1,0 +1,49 @@
+// SCAPS script
+// this script calculates the IV curve of the series connection of two cells
+
+// setting the starting conditions
+clear all
+clear actions 
+action light
+action iv.startv 0
+action iv.stopv 1
+action iv.increment 0.02
+action iv.checkaction 
+action iv.stopaftervoc 
+
+// cell 1 
+load definitionfile CdTe air activated.def
+calculate singleshot 
+get iv zu
+
+// cell 2
+load definitionfile Numos CIGS baseline.def
+calculate singleshot 
+get iv vw
+
+// calculate the IV of the series connection
+math series xyzuvw nz
+
+// visualise the results
+plot draw zu
+plot draw vw
+plot draw xy
+
+math characteristics.all cxy
+math characteristics.voc xxy
+math characteristics.jsc yxy
+math characteristics.ff zxy
+math characteristics.eta uxy
+math characteristics.vmpp vxy
+math characteristics.jmpp wxy
+
+show scriptvariables 
+
+
+
+
+
+
+
+
+

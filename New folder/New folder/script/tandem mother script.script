@@ -1,0 +1,24 @@
+// SCAPS script
+
+set scriptvariable.filename test tandem from left.def
+set scriptvariable.iindex 2
+set scriptvariable.jindex 3
+// and determine the split position, compatible with the indexes i and j input above
+load definitionfile filename
+calculate equilibrium_only // just to define the mesh
+get layer2.rightx xvalue // the layer numbers should match the value of iindex and jindex defined above
+get layer3.leftx yvalue  // should give the same result
+set scriptvariable.name.xvalue x_split (um)
+set scriptvariable.name.yvalue y_split (um)
+
+// show scriptvariables 
+
+// select one or more of the strategies below, by commenting or out-commenting the corresponding command
+//run script tandem strategy set spectrum.script
+//run script tandem strategy adapt generation.script
+//run script tandem strategy adapt filters.script
+run script tandem strategy fake partial cells.script
+
+
+
+

@@ -1,0 +1,16 @@
+/ transmission of glass + TCO
+/ data from J. Sites, Solar Energy Materials and Solar Cells, vol. 75, 243-251 (2003)
+/lambda[nm]	transmission[%]
+1	78
+400	78
+450	81
+500	84
+550	85
+600	84.5
+650	82
+700	79
+750	77
+800	73
+850	69
+900	65
+10000	65

@@ -1,0 +1,77 @@
+// SCAPS script
+// Curvefitting in SCAPS avant la lettre, at a moment where curvefitting was not yet implemented in SCAPS
+// but when it could already be done with the script 
+
+// this script will find the CdS thickness that will fit the "measured" short wavelength QE 
+
+clear all 
+load definitionfile Numos CIGS baseline.def
+action qe.startlambda 300
+action qe.stoplambda 550 
+// we only look to the UV/blue part 
+// (we cannot fit the red part without adapting also the other parameters NA and Nt !)
+// now the rest of the action panel, to do only what we want
+clear actions 
+action qe.doqe
+action qe.increment 10
+action light // the NUMOS "measurement" was in dark, but the calculation in light is so much faster :-) 
+
+load measurement.qe Numos Ex 1 dark.qe
+get measurement.qe zu // this sets also zname and uname
+
+set scriptvariable.xname d(CdS) (µm)
+set scriptvariable.yname Chi_sq
+
+//show scriptvariables 
+
+// three initial guesses for the parameter d(CdS)
+math filllinear x 0.01 0.19 3 // thus, the guesses are 10 nm, 100 nm and 190 nm
+
+set scriptvariable.maxiteration 3
+loop start 
+set layer2.thickness xvector[loopcounter] // set the CdS thicknesses from the 3 first elements of xvector
+// show scriptvariables 
+calculate singleshot // calculate QE(dark)
+get qe vw // place QE in vectors v and w
+math chi_square yzuvw // calculate the Chi-square deviation between the measured and calculated QE
+set scriptvariable.yvector[loopcounter] yvalue // and place it in yvector at it's place
+// show scriptvariables 
+loop stop 
+
+set scriptvariable.mode 5         // means find a minimum (here a QE curve fit), the variable (here d) is of "linear nature"
+loop maxiteration 15                // do not exagerate
+loop maxerror     1e-7                 // do not exagerate
+set scriptvariable.looperror 1E30
+
+loop start                             // start the iteration to find the root
+
+// use the dll dellivered with SCAPS
+
+rundll scapsuserfunction               
+
+// it looks only to xvector and yvector [0], [1] and [2] to find a better guess to make y = maximal
+// the function returns xvalue as a better guess for the variable; it is placed in yvalue
+// set this to d
+// then place this better guess on xvector[0] (and push the rest upward)               
+
+set layer2.thickness xvalue // use the proposed new value as d(CdS)
+set scriptvariable.xvector xvalue      
+
+calculate singleshot 
+
+// places the new Chi_sq in yvector[0] and pushes the rest up
+get qe vw // place QE in vectors v and w
+math chi_square yzuvw // calculate the Chi-square deviation between the measured and calculated QE
+set scriptvariable.yvector yvalue
+
+// you can comment the show command below out when it runs to your satisfaction       
+//  show scriptvariables                   
+
+loop stop
+plot drawversusindex x
+plot drawversusindex y
+show scriptvariables                  
+
+
+
+

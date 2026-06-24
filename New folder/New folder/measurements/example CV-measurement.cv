@@ -1,0 +1,64 @@
+This is an example file with a CV-measurement
+SCAPS accepts two possible formats for such a file:
+
+1) the outputfile with extension .cv made by SCAPS when clicking the "save" button in the CV-panel
+(this is then a simulation rather than a measurement; the cell area is assumed to be 1 cm2)
+
+2) a general measurement file produced by the measurement system of a user. 
+SCAPS has a few rules to accept and interpret these files:
+- if the first line contains the word SCAPS, the file is treated as an output file produced by SCAPS
+- if the first line contains the word MIA, the file is treated as an output file produced by MIA (Measure It All, the measurement environment of ELIS/UGent)
+- if the first line contains neither "SCAPS" nor "MIA", the file is treated as a general measurement file, and the following rules apply:
+
+- every line until the first data line is discarded, unless it is a "units" or an "area" statement.
+- a data line is a line starting with two or more numbers, separated by spaces or tabs
+- the first number is interpreted as the voltage V, the second as the capacitance C, a possible third number as conductance G (units: see below); possible further numbers are discarded
+- after the first data line is met, processing stops 
+         -  at the first empty line 
+         - or when the max. number of datalines is read, at present this is 500 (18-8-2005)
+         - or at the end of the measurement file
+
+- just below is an example of an "area" statement (to be placed before the first data line)
+cell area: 3.14 cm2
+("cell area" tells SCAPS that it is an area statement ("area" will also do); "3.14" is read as the value; the first character after the value, here "c" is interpreted as a decimal prefix (you could write m2, cm2, mm2, ... ); if no area statement encountered, A = 1 cm2 is assumed).
+
+- just below is an example of a "unit" statement (to be placed before the first data line)
+units: C: nF    V: V  G: S
+("units" tells SCAPS that it is a units-statement); "C:" is followed by the units of the C: Farad, and "G:" is followed by the units of G: Siemens;
+both can be preceeded by a decimal prefix (e.g. mS, µF or uF, nF, pF); "V:" is followed by the units of voltage: Volt, can be preceeded by a decimal prefix (e.g. mV); the order of "C:", "G:" and "V:" is free; if no units statement encountered, or no "C:", or no "G", or no "V:", the defaults are assumed: nF for C, Siemens for G and Volt for V).
+
+-0.80	6.63E+00	5.78E-04
+-0.75	6.66E+00	6.28E-04
+-0.70	6.69E+00	6.81E-04
+-0.65	6.69E+00	7.38E-04
+-0.60	6.72E+00	8.01E-04
+-0.55	6.75E+00	8.70E-04
+-0.50	6.81E+00	9.42E-04
+-0.45	6.85E+00	1.02E-03
+-0.40	6.91E+00	1.11E-03
+-0.35	6.97E+00	1.20E-03
+-0.30	7.03E+00	1.30E-03
+-0.25	7.13E+00	1.42E-03
+-0.20	7.22E+00	1.54E-03
+-0.15	7.35E+00	1.67E-03
+-0.10	7.47E+00	1.82E-03
+-0.05	7.63E+00	1.99E-03
+0.00	7.79E+00	2.18E-03
+0.05	7.98E+00	2.39E-03
+0.10	8.23E+00	2.63E-03
+0.15	8.48E+00	2.90E-03
+0.20	8.76E+00	3.23E-03
+0.25	9.11E+00	3.61E-03
+0.30	9.51E+00	4.05E-03
+0.35	9.95E+00	4.58E-03
+0.40	1.05E+01	5.28E-03
+0.45	1.11E+01	6.19E-03
+0.50	1.19E+01	7.54E-03
+0.55	1.30E+01	9.89E-03
+0.60	1.44E+01	1.54E-02
+0.65	1.65E+01	3.11E-02
+0.70	1.93E+01	7.69E-02
+0.75	2.44E+01	1.96E-01
+0.80	3.45E+01	4.62E-01
+
+Possible comments (or further data) after the empty line above is discarded

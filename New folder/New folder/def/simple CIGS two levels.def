@@ -1,0 +1,256 @@
+> SCAPS version 3.0.02, 15-4-2011, ELIS - UGent: Problem definition file
+> last saved by SCAPS: 	26-05-2011 at 11:46:07
+> 
+> SCAPS version 2.10.3, 7-2-2011, ELIS - UGent: 
+> SCAPS All SCAPS Settings file, saved on 	14-02-2011 at 14:13:31
+> problem definition file loaded :
+> c:\Koen\Scaps\SCAPS 21003 werkversie\def\Numos CIGS baseline.def
+> last saved: 	14-02-2011 at 14:13:31
+> 
+> > begin of problem definition file
+> SCAPS version 2.10.3, 7-2-2011, ELIS - UGent: Problem definition file
+> last saved by SCAPS: 	14-02-2011 at 14:13:33
+> 
+> a CIGS solar cell problem: the baseline (starting file)
+> file used for the NUMOS workshop on numerical modelling of thin film solar cells
+> Gent, 30 march 2007
+> Workshop given by Marc Burgelman, ELIS, UGent
+> 
+> > end of problem definition file
+> > begin of action list file
+> > end of action list file
+> > begin of batch settings file
+> > end of batch settings file
+> > begin of recorder settings file
+> > end of recorder settings file
+> > begin of general SCAPS settings file
+> > end of general SCAPS settings file
+> 
+convergence
+
+clamp_psi :  5.00e-01 units kT
+clamp_n :  5.00e-01 units kT
+clamp_p :  5.00e-01 units kT
+termination_psi :  1.00e-03 units kT
+termination_Fn :  1.00e-03 units kT
+termination_Fp :  1.00e-03 units kT
+maxiter :   250
+defectdiscretisations :     7
+widthtail :  7.00e+00
+widthgauss :  6.00e+00
+TunnelMassChoice :     0
+QE calculation mode:  1 (0: cst. # of photons, 1: cst. incident power)
+number of photons :  1.00e+16
+incident power :  1.00e+03
+recalculate mesh :  0 (0: fixed mesh, 1: adaptive mesh)
+maximum ratio between neighbouring points :  1.60e+00
+minimum ratio between neighbouring points :  1.05e+00
+generation limit :  1.00e+00 microA/cm2
+recombination limit :  1.00e-03 microA/cm2
+Mott-Schottky analysis epsilon of sheet # :  0
+Mott-Schottky analysis epsilon of sheet side :  1	(left side = -1; right side = +1)
+Mott-Schottky analysis number of points :  3	(3 or 5 as of december 2008)
+Mott-Schottky analysis polynomial order middle :  2	(1 or 2 as of december 2008)
+Mott-Schottky analysis polynomial order edges:  1	(1 or 2 as of december 2008)
+
+
+back contact
+
+flatband : 0 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 0 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Fi_m :   5.4000 [eV]
+Sn :  1.000e+05 [m/s]
+Sp :  1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+optical filter : reflection
+wavelength independent: 1
+filter value: 8.00000000e-01
+
+layer
+
+name : p-CIGS
+d : 1.000e-06 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    13.600000	    13.600000	    13.600000	     1.000000	     1.000000	    13.600000	    13.600000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  1.100000	  1.100000	  1.100000	  1.000000	  1.000000	  1.100000	  1.100000	 0	 0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	 0	 0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 2.000000e+22	 2.000000e+22	 2.000000e+22	 1.000000e+00	 1.000000e+00	 2.000000e+22	 2.000000e+22	 0	 0	[/m^3]
+Nd(y) :	 1.000000e+07	 1.000000e+07	 1.000000e+07	 1.000000e+00	 1.000000e+00	 1.000000e+07	 1.000000e+07	 0	 0	[/m^3]
+absorption grading :	 1127.25	 1127.25	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : Numos CIGS.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : Numos CIGS.abs
+
+srhrecombination
+
+type : donor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  2 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(y) :	 1.000e+20	 1.772e+19	 1.772e+19	 1.000e+00	 1.000e+00	 1.000e+20	 1.000e+20	 0	 0	[1/m3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+20 [/m^3]
+Nright : 1.000e+20 [/m^3]
+leveltype : +/0	
+sigma_n : 5.000e-17	[m^2]
+sigma_p : 1.000e-19	[m^2]
+Et :   0.200	[eV]
+
+next
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(y) :	 1.000e+20	 1.000e+20	 1.000e+20	 1.000e+00	 1.000e+00	 1.000e+20	 1.000e+20	 0	 0	[1/m3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+20 [/m^3]
+Nright : 1.000e+20 [/m^3]
+leveltype : 0/-	
+sigma_n : 1.000e-19	[m^2]
+sigma_p : 1.000e-19	[m^2]
+Et :   0.300	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : n-CdS
+d : 5.000e-08 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.200000	  4.200000	  4.200000	  1.000000	  1.000000	  4.200000	  4.200000	 0	 0	[eV]
+Eg :	  2.400000	  2.400000	  2.400000	  1.000000	  1.000000	  2.400000	  2.400000	 0	 0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	 0	 0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 1.000000e+06	 1.000000e+06	 1.000000e+06	 1.000000e+00	 1.000000e+00	 1.000000e+06	 1.000000e+06	 0	 0	[/m^3]
+Nd(y) :	 1.000000e+23	 1.000000e+23	 1.000000e+23	 1.000000e+00	 1.000000e+00	 1.000000e+23	 1.000000e+23	 0	 0	[/m^3]
+absorption grading :	  516.66	  516.66	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : Numos CdS.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : Numos CdS.abs
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : gauss
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 1.772e+23	 1.772e+23	 1.772e+23	 1.000e+00	 1.000e+00	 1.772e+23	 1.772e+23	 0	 1	[1/m3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 9.997e+23 [/m^3 eV]
+Nright : 9.997e+23 [/m^3 eV]
+leveltype : neutral	
+sigma_n : 1.000e-17	[m^2]
+sigma_p : 1.000e-17	[m^2]
+Et :   1.200	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : n-ZnO
+d : 5.000e-08 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	     9.000000	     9.000000	     9.000000	     1.000000	     1.000000	     9.000000	     9.000000	 0	 0	[-]
+chi :	  4.450000	  4.450000	  4.450000	  1.000000	  1.000000	  4.450000	  4.450000	 0	 0	[eV]
+Eg :	  3.300000	  3.300000	  3.300000	  1.000000	  1.000000	  3.300000	  3.300000	 0	 0	[eV]
+Nc :	 2.200000e+24	 2.200000e+24	 2.200000e+24	 1.000000e+00	 1.000000e+00	 2.200000e+24	 2.200000e+24	 0	 0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-02	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 2.500000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 1.000000e+06	 1.000000e+06	 1.000000e+06	 1.000000e+00	 1.000000e+00	 1.000000e+06	 1.000000e+06	 0	 0	[/m^3]
+Nd(y) :	 1.000000e+24	 1.000000e+24	 1.000000e+24	 1.000000e+00	 1.000000e+00	 1.000000e+24	 1.000000e+24	 0	 0	[/m^3]
+absorption grading :	  375.75	  375.75	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : Numos ZnO.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : Numos ZnO.abs
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : gauss
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 1.772e+22	 1.772e+22	 1.772e+22	 1.000e+00	 1.000e+00	 1.772e+22	 1.772e+22	 0	 1	[1/m3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 9.997e+22 [/m^3 eV]
+Nright : 9.997e+22 [/m^3 eV]
+leveltype : neutral	
+sigma_n : 1.000e-16	[m^2]
+sigma_p : 1.000e-16	[m^2]
+Et :   1.650	[eV]
+
+
+front contact
+
+flatband : 0 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 0 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Fi_m :  4.45 [eV]
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+optical filter : transmission
+wavelength independent: 1
+filter value: 9.50000000e-01
+
+working point
+
+illuminated from : right
+internal Rfront :   0.00000000
+internal Tfront :  1.0000e+00

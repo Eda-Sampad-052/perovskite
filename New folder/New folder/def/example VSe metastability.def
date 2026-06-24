@@ -1,0 +1,256 @@
+> SCAPS 3.3.02 ELIS-UGent: Version scaps3302.exe, dated 28-08-2015, 11:48:47 Problem definition file
+> last saved by SCAPS: 	01-09-2015 at 14:32:24
+> 
+> 
+> SCAPS Example definition file
+> =========================
+> 
+> Example of a CuInSe2-based solar cell with a V_Se metastable defect present
+> Transition and activation energies based on: JAP 100 (2006) 113725
+> Clamping is used but not necessary as the defect density is low with respect to the doping density
+> 
+> KD Elis-UGent 18-4-2012
+> 
+convergence
+
+termination_Meta_full :  1.00e-04 (rel.)
+maxmetaiter_full :  1000
+usemetaclamping : 1
+Mott-Schottky analysis epsilon of sheet # :  0
+Mott-Schottky analysis epsilon of sheet side :  1	(left side = -1; right side = +1)
+
+
+back contact
+
+flatband : 0 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 0 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Fi_m :   5.1456 [eV]
+Sn :  1.000e+05 [m/s]
+Sp :  1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CISSe
+d : 2.000e-06 [m]
+composition grading :	  0.00000	  0.00000	  1.40000	  0.10000	  0.10000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 8.000e+04	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 1	 0	[m/s]
+eps :	    12.000000	    12.000000	    10.000000	    10.000000	    10.000000	    12.000000	    12.000000	 0	 0	[-]
+chi :	  4.300000	  4.300000	 -0.140000	  1.000000	  1.000000	  4.300000	  4.300000	 0	 0	[eV]
+Eg :	  1.040000	  1.530000	  0.140000	  1.000000	  1.000000	  1.040000	  1.040000	 2	 0	[eV]
+Nc :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 0	[/m^3]
+Nv :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+22	 1.000000e+21	 2.000000e+16	 1.000000e+02	 2.000000e+00	 1.000000e+22	 1.000000e+22	 1	 2	[/m^3]
+Nd(uniform) :	 1.000000e+11	 1.000000e+11	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+11	 1.000000e+11	 0	 2	[/m^3]
+absorption grading :	 1192.29	  810.44	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CIS Moeller.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CIS Moeller.abs
+
+srhrecombination
+
+type : doubleacceptor ( 2 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 2.000000e+21	 2.000000e+21	 1.000000e+20	 1.000000e+00	 1.000000e+00	 2.000000e+21	 2.000000e+21	13	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 2.000e+21 [/m^3]
+Nright : 2.000e+21 [/m^3]
+leveltype : 0/-	-/2-	
+sigma_n : 1.000e-21	1.000e-21	[m^2]
+sigma_p : 1.000e-21	1.000e-21	[m^2]
+Et :   0.060	  0.980	[eV]
+
+next
+
+type : donor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  2 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 2.000000e+21	 2.000000e+21	 1.000000e+20	 1.000000e+00	 1.000000e+00	 2.000000e+21	 2.000000e+21	13	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 2.000e+21 [/m^3]
+Nright : 2.000e+21 [/m^3]
+leveltype : +/0	
+sigma_n : 1.000e-21	[m^2]
+sigma_p : 1.000e-21	[m^2]
+Et :   0.070	[eV]
+
+next
+
+type : neutral ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(uniform) :	 1.000000e+21	 1.000000e+21	 1.000000e+20	 1.000000e+00	 1.000000e+00	 1.000000e+21	 1.000000e+21	 0	 2	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+21 [/m^3]
+Nright : 1.000e+21 [/m^3]
+leveltype : neutral	
+sigma_n : 1.000e-19	[m^2]
+sigma_p : 1.000e-19	[m^2]
+Et :   0.600	[eV]
+
+Metastable properties: transition 0
+
+Nt(x) :	 4.000e+21	 1.000e+21	 1.000e+16	 1.000e+00	 5.000e-01	 3.000e+21	 3.000e+21	 1	 1	[1/m3]
+DonorDefect :  1
+AcceptorDefect :  0
+Donor charge state :  4
+Phonon frequency : 5.000e+12 [Hz]
+Metastability type :  1
+Electron process :  1
+Hole process :  0
+UserDefined Activation Energies : 0	0	1	0	1	
+sigma_acc_n : 1.000e-21 [m^2]
+sigma_acc_p : 1.000e-21 [m^2]
+sigma_don_n : 1.000e-21 [m^2]
+sigma_don_p : 1.000e-21 [m^2]
+Eact_EE :   0.760 [eV]
+Eact_HC :   0.350 [eV]
+Eact_EC :   0.100 [eV]
+Eact_HE :   0.730 [eV]
+Eact_TR :   0.190 [eV]
+Reference for transition energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+initialacceptorconfiguration :   5.00e-01
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdS
+d : 1.000e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  1.00000	 0	 1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 1	 0	[m/s]
+eps :	     9.000000	     9.000000	    10.000000	    10.000000	    10.000000	     9.000000	     9.000000	 0	 0	[-]
+chi :	  4.100000	  4.100000	  1.000000	  1.000000	  1.000000	  4.100000	  4.100000	 0	 0	[eV]
+Eg :	  2.420000	  2.420000	  0.500000	  1.000000	  1.000000	  2.420000	  2.420000	 2	 0	[eV]
+Nc :	 3.000000e+24	 3.000000e+24	 1.000000e+01	 1.000000e+01	 1.000000e+01	 3.000000e+24	 3.000000e+24	 0	 0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e+25	 1.800000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+11	 1.000000e+11	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+11	 1.000000e+11	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+23	 3.000000e+23	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+23	 1.000000e+23	 1	 2	[/m^3]
+absorption grading :	  512.39	  512.39	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CdS.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CdS.abs
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(y) :	 1.000000e+23	 1.000000e+23	 1.000000e+23	 1.000000e+00	 1.000000e+00	 1.000000e+23	 1.000000e+23	 1	 0	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+23 [/m^3]
+Nright : 1.000e+23 [/m^3]
+leveltype : neutral	
+sigma_n : 1.000e-17	[m^2]
+sigma_p : 1.000e-17	[m^2]
+Et :   1.200	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : ZnO
+d : 2.000e-07 [m]
+composition grading :	  0.00000	  1.00000	 20.00000	200.00000	  0.00000	  0.00000	  1.00000	 0	 1	[-]
+v_th_n :	 1.000e+06	 1.000e+06	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+06	 1.000e+06	 0	 0	[m/s]
+v_th_p :	 1.000e+06	 1.000e+06	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+06	 1.000e+06	 0	 0	[m/s]
+eps :	     9.000000	     9.000000	    10.000000	    10.000000	    10.000000	     9.000000	     9.000000	 0	 0	[-]
+chi :	  4.100000	  4.100000	  1.000000	  1.000000	  1.000000	  4.100000	  4.100000	 0	 0	[eV]
+Eg :	  3.300000	  3.300000	  0.500000	  1.000000	  1.000000	  3.300000	  3.300000	 0	 0	[eV]
+Nc :	 4.000000e+24	 4.000000e+24	 1.000000e+01	 1.000000e+01	 1.000000e+01	 4.000000e+24	 4.000000e+24	 0	 0	[/m^3]
+Nv :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-02	 1.000000e-02	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 0	 0	[m^2/Vs]
+mu_p :	 2.500000e-03	 2.500000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.500000e-03	 2.500000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+11	 1.000000e+11	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+11	 1.000000e+11	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+24	 1.000000e+24	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+24	 1.000000e+24	 0	 2	[/m^3]
+absorption grading :	  375.75	  375.75	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : ZnO.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : ZnO.abs
+
+srhrecombination
+
+type : donor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 2.000000e+23	 2.000000e+23	 2.000000e+23	 1.000000e+00	 1.000000e+00	 2.000000e+23	 2.000000e+23	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 2.000e+23 [/m^3]
+Nright : 2.000e+23 [/m^3]
+leveltype : +/0	
+sigma_n : 1.000e-17	[m^2]
+sigma_p : 1.000e-17	[m^2]
+Et :   1.700	[eV]
+
+
+front contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+working point
+
+illuminated from : right
+internal Rfront :   1.00000000
+internal Tfront :  0.0000e+00
+voltage V applied to : -1 (+1: right contact; -1: left contact)
+cell reference system :  1 (1: as a consumer (consumed power = +VJ; 0: as a generator (generated power = +VJ) )

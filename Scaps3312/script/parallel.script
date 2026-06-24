@@ -1,0 +1,51 @@
+clear all
+clear actions
+
+action light
+action iv.startv 0
+action iv.stopv 4.0
+action iv.increment 0.02
+action iv.checkaction
+action iv.stopaftervoc
+
+
+loop t 300 400 10
+{
+
+set temperature t
+
+load definitionfile K2ScCuCl6.def
+calculate singleshot
+get iv iv1
+
+load definitionfile Rb2ScCuCl6.def
+calculate singleshot
+get iv iv2
+
+
+load definitionfile Cs2ScCuCl6.def
+calculate singleshot
+get iv iv3
+
+math series iv1 iv2 iv3 iv_series
+
+math characteristics.all iv_series
+get math.characteristics.voc  voc_t
+get math.characteristics.jsc  jsc_t
+get math.characteristics.ff   ff_t
+get math.characteristics.eta  eta_t
+
+
+extract t        temp
+extract voc_t    voc
+extract jsc_t    jsc
+extract ff_t     ff
+extract eta_t    eta
+}
+
+plot draw temp voc
+plot draw temp jsc
+plot draw temp ff
+plot draw temp eta
+
+show scriptvariables

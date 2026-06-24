@@ -1,0 +1,62 @@
+//Example script SCAPS 2.10.3
+//KD ELIS-Ugent 3-2011
+//The free carrier density profiles and the shallow acceptor profile are recorded for different temperatures
+//The free hole density is compared with the free electron density and the shallow acceptor density
+//The results are plotted
+
+set errorhandling.toscreen
+
+// to start from a well defined condition
+clear all 
+clear actions
+action dark // you can also set it to light, and look to the difference
+
+//load all files of interest
+//definition file (this can be omitted when the script is run from the user interface and a definition file was already loaded)
+load definitionfile  Numos CIGS baseline.def        
+// recorder file (0 = n; 1 = p; 2 = NA)
+load recordersettingsfile PersonalisedSCAPSgraph.srf 
+// dummy batch file (@ current working point) 
+load singleshotbatch      
+
+//construction x-vector (holds Temperatures)
+set  scriptvariable.nx 6   //allocate space for 6 ('0'->'5') temperatures 
+set  scriptvariable.xvector[0]   260  //begin at 260 K
+set  scriptvariable.xvector[5]   360  //end at 360 K
+math rangeLin x    //scale linear in between xvector=[260 280 300 320 340 360]
+
+//set loop properties
+loop  maxiteration 5 //loop from 0 to 5: maximum indexed subscript will be 5
+
+//beginning of the loop
+loop start
+
+action    workingpoint.Temperature xvector[loopcounter]  //set new temperature
+load   singleshotbatch  //update singleshotbatch (Temperature has changed)
+calculate recorder   // perform calculations
+
+//access data
+set scriptvariable.mode 0 // 0 = n
+get recorder wy  //store mesh in w and n in y
+set scriptvariable.mode 1 // 1 = p
+get recorder wz  //store mesh in w and p in z
+set scriptvariable.mode 2 // 2 = NA
+get recorder wu  //store mesh in w and NA in u
+
+//do math
+math divide  vzy // v = z/y -> p/n
+math divide  uzu // u = z/u -> p/NA
+
+
+//plot results
+set scriptvariable.vname p/n (#)
+set scriptvariable.uname p/NA (cm-3)
+plot  draw wv // p/n <-> mesh
+plot draw yz // p <-> n
+plot draw wu // p/NA <-> mesh
+
+loop stop
+//end of the loop
+
+//end of script
+

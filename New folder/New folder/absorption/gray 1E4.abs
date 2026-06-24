@@ -1,0 +1,7 @@
+/a gray absorber
+/alpha = 1E4 /cm for all wavelengths
+/lambda[nm]	alfa[m^-1]
+10	1.00E6
+100	1.00E6
+1000	1.00E6
+10000	1.00E6

@@ -1,0 +1,69 @@
+// Example script SCAPS 2.10.3
+// MB 26-5-2011 
+// For a simple example cell, it calculates the position where a defect level crosses the Fermi level, 
+// when the voltage is varied from reverse to forward
+
+
+// to start from a well defined condition
+clear all 
+action dark // you can also set it to light, and look to the difference
+clear actions 
+action iv.doiv
+action iv.startv 0
+action iv.stopv 0 // will be re-set in the loop
+action iv.points 2
+
+//definition file (this can be omitted when the script is run from the user interface and a definition file was already loaded)
+load definitionfile  simple CIGS two levels.def  
+set layer1.defect1.et 0.35 // make it a little bit deeper bel;ow EC for testing; you can play with this parameter
+
+// when Et is too close to EC, there is no crossing point with EFn (depending on the bias volatge)
+// then this script returns x=0 for the position of the crossing point, that is:  d(CIGS) away from the junction
+// At a voltage where there is/is not a crossing between Et and EFn, you'll seen then a discontinuity in the output plot
+
+set scriptvariable.maxiteration 21
+math filllinear v -.5 0.5 maxiteration // fill vvector with -1.0, -0.75, to +0.25 Volt
+set scriptvariable.nw maxiteration // reserves space for wvactor
+set scriptvariable.uvalue 0 // a scriptvariable needed to find the place where Et - EFn = 0
+
+set scriptvariable.vname V (Volt)
+set scriptvariable.wname x from junction (µm)
+set scriptvariable.uname Et-EFn (eV)
+
+get layer1.rightx wvalue // the position of the junction CIGS/CdS
+get layer1.rightindex windex // the index of the junction CIGS/CdS
+set scriptvariable.xindex 0 // the index of the left side of CIGS
+get layer1.defect1.Et yvalue // in this def file, Et is referred "below EC"
+// show scriptvariables 
+
+loop start
+action iv.stopv vvector[loopcounter]
+action iv.startv vvector[loopcounter]
+action workingpoint.voltage vvector[loopcounter]
+
+calculate singleshot 
+get energybands.ec xy // y(x) = EC(x)
+math extract XXxw // only retain from index=0 to index = (junction)
+math extract YYxw // only retain from index=0 to index = (junction)
+
+math constant UXy // makes uvector of the same size as xvector, and fill all elements with yvalue
+// then uvector contains EC(x)-Et(x)
+math vectorsubtract uyu // now uvector contains Et(x), absolute, and only in CIGS
+
+get energybands.efn xy // y(x) = EFn(x)
+math extract XXxw // only retain from index=xindex=0 to index =windex = (junction)
+math extract YYxw // only retain from index=0 to index = (junction) // now uvector contains EFn(x), absolute, only in CIGS
+
+math vectorsubtract uuy
+// thusr xvextor=x,  uvector=Et - EFn, only in layer 1 (CIGS),
+
+math interpolate xXuU // finds x in xvector where (by interpolation) uvector(x) = uvalue=0
+math scalarsubtract xwx // distance to the junction
+set scriptvariable.wvector[loopcounter] xvalue // place the result in wvector for plotting
+// show scriptvariables 
+
+loop stop
+action workingpoint.voltage 0 // to restore the workpoint in the default position
+plot vw
+
+

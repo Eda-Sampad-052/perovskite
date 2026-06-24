@@ -1,0 +1,37 @@
+// SCAPS script
+// calculates the IV curve of the parallel connection of two solar cells
+
+// define the starting conditions
+clear all
+clear actions 
+action iv.startv 0
+action iv.stopv 1
+action iv.increment 0.02
+action iv.stopaftervoc 
+action iv.doiv 
+action light 
+
+// the first cell
+load definitionfile CdTe air activated.def
+calculate singleshot 
+get iv zu
+
+// the second cell
+load definitionfile Numos CIGS baseline.def
+calculate singleshot 
+get iv vw
+
+// the parallel connection
+math parallel xyzuvw 51 0.75 0.25 // cell 1 has weight (relative area) 0.75, cell 2 0.25
+
+// show the results
+show scriptvariables 
+plot draw zu
+plot draw vw
+plot draw xy
+
+
+
+
+
+

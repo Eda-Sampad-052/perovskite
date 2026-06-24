@@ -1,0 +1,74 @@
+> Absorption data for Zn_xCd_(1-x)S with x = 0.20
+> Obtained by interpolation between
+> Compound A = pure CdS, data taken from S. Adachi, 
+> "Optical constants of crystalline and amprphous semiconductors", 
+> wurzite, E perp. to c, p. 504, Kluwer Academic Publishers, 1999.
+> and beyond 770 nm extended by a (scaled) measurement by Malmström, 
+> Angström Solar Centre, Uppsala
+> Compound B = ZnS, S. Adachi, 
+> "Optical constants of crystalline and amprphous semiconductors", 
+> p. 429, Kluwer Academic Publishers, 1999.
+>
+> Interpolation algorithm by M.B., ELIS, UGent, march 2008
+> lambda (nm)	alpha (1/m)
+200	7.197E+07
+210	7.655E+07
+220	8.368E+07
+230	7.609E+07
+240	6.962E+07
+250	6.104E+07
+260	4.559E+07
+270	3.550E+07
+280	2.989E+07
+290	2.654E+07
+300	2.431E+07
+310	2.243E+07
+320	2.078E+07
+330	1.932E+07
+340	1.802E+07
+350	1.691E+07
+360	1.598E+07
+370	1.512E+07
+380	1.424E+07
+390	1.349E+07
+400	1.277E+07
+410	1.216E+07
+420	1.143E+07
+430	1.141E+07
+440	9.463E+06
+450	5.437E+06
+460	2.949E+06
+470	1.848E+06
+480	1.336E+06
+490	1.069E+06
+500	9.084E+05
+510	7.843E+05
+520	6.816E+05
+530	5.956E+05
+540	5.266E+05
+550	4.733E+05
+560	4.322E+05
+570	3.981E+05
+580	3.692E+05
+590	3.437E+05
+600	3.214E+05
+610	3.012E+05
+620	2.828E+05
+630	2.677E+05
+640	2.532E+05
+650	2.410E+05
+660	2.290E+05
+670	2.183E+05
+680	2.089E+05
+690	2.002E+05
+700	1.914E+05
+710	1.836E+05
+720	1.771E+05
+730	1.696E+05
+740	1.638E+05
+750	1.579E+05
+760	1.520E+05
+770	1.479E+05
+780	1.426E+05
+790	1.376E+05
+800	1.338E+05

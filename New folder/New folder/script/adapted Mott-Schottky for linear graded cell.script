@@ -1,0 +1,37 @@
+// SCAPS script
+// MB 26-5-2011
+// to illustrate the SCAPS script, and some basic theory
+
+// when the doping density is constant (uniformely doped junction), the 1/C^2 vs. V plot is linear (Mott-Schottky)
+// and from it's slope the doping density N is determined
+// this is well known from text books
+
+// when the doping linearly increasing going away from the junction (linearly graded junction)
+// the 1/C^3 vs. V plot is linear (let's call it adapted Mott-Schottky)
+// and from it's slope the grading constant a is determined.
+// in contrast, the "normal" Mott-Schottkyplot is not a straight line
+// this script is illustrating this statement
+
+clear all
+load definitionfile linear two layers.def
+// prepare for a CV calculation only
+clear actions 
+action cv.docv
+action cv.startv -1
+action cv.stopv 0.5
+action cv.points 31
+
+calculate singleshot 
+get cv vx // vvector vontains the voltages, xvector the capacities
+math vectorreciproque xx // xvector contains 1/C
+math vectormultiply yxx // yvector contains 1/C^2
+math vectormultiply zyx // zvector contains 1/C^3
+
+set scriptvariable.yname 1/C2 (1/nF^2)
+set scriptvariable.zname 1/C3 (1/nF^3)
+plot vy
+plot vz
+
+show scriptvariables
+
+

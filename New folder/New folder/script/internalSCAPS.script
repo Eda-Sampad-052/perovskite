@@ -1,0 +1,76 @@
+// SCAPS script
+clear all // take a clean start
+action iv.startv 0
+action iv.stopv 0.8
+action iv.increment 0.02
+action iv.stopaftervoc 
+action iv.doiv 
+
+action light // the illumination conditions actually present in the Action Panel
+
+load definitionfile simple pn.def // always present in the SCAPS distributions
+calculate singleshot // is supposed to work always for the above
+
+// set some bulk defect properties
+set layer1.defect1.uniform // set a distribution to make Echar meaningful
+set layer1.defect1.Et 3.333
+set layer1.defect1.Echar 0.200 // then Ntotal = 0.2*Npeak with their standard units
+
+set layer1.defect1.Ntotal 1.111e11
+set layer1.defect1.Npeak 2.222e12 // will of course reset the Ntotal previously set
+
+// if new Echar would be set here, the Ntotal and Npeak shown in the SCAPS IF-panel can be non-compatible
+// SCAPS cannot know whether you want to keep Ntotal and adapt Npeak, or otherwise...
+// as in the user interface, scaps will opt to keep Ntotal, and to adapt Npeak
+
+set layer1.defect1.capture_cross_section.electron 5.555e-15
+set layer1.defect1.capture_cross_section.hole 6.666e-16
+
+// set some interface defect properties
+set interfaces_all.active_with_1_default_defect // new in SCAPS 3.3.12
+set interface1.ifdefect1.uniform // to have an eb]nergy distribution, and meaningfull Echar; 
+set interface1.ifdefect1.et 0.567
+set interface1.ifdefect1.Echar 0.50 // then Ntotal = 0.5* Npeak each with their standard units
+// as in the user interface, SCAPS opts to keep Ntotal, and to adapt Npeak to make it compatible with the Echar just set
+// when you want to set Npeak, you should do it after having set Echar.
+
+set interface1.ifdefect1.ntotal 7.777E11
+set interface1.ifdefect1.npeak 1.111E12 // will of course reset the ntotal previously set
+
+set interface1.ifdefect1.capture_cross_section.electron 5.55E-14
+set interface1.ifdefect1.capture_cross_section.hole 4.44E-13
+
+// ... and now a test of the new script command to set a name (or label) to avalue...zvalue
+// such label is automatically assigned in many (most) get... statements
+get layer1.defect1.Et avalue
+get layer1.defect1.Echar bvalue
+get layer1.defect1.capture_cross_section.electron cvalue
+get layer1.defect1.capture_cross_section.hole dvalue
+get layer1.defect1.ntotal evalue
+get layer1.defect1.npeak fvalue
+
+get interface1.IFdefect1.et gvalue
+get interface1.IFdefect1.echar hvalue
+get interface1.IFdefect1.capture_cross_section.electron ivalue
+get interface1.IFdefect1.capture_cross_section.hole jvalue
+get interface1.IFdefect1.ntotal kvalue
+get interface1.IFdefect1.npeak lvalue
+
+get layer2.Eg mvalue
+get layer2.Nd nvalue
+get action.workingpoint.temperature ovalue
+get external.rs pvalue
+get iv ab
+get characteristics.eta qvalue
+get characteristics.voc rvalue
+get characteristics.jsc svalue
+get characteristics.FF tvalue
+get action.pin.in_cell uvalue
+// show scriptvariables 
+
+set scriptvariable.name.mvalue Eg2 (eV) // these are not (yet?) assigned automatically
+set scriptvariable.name.nvalue ND2 (/cm3) // these are not (yet?) assigned automatically
+show scriptvariables 
+
+
+

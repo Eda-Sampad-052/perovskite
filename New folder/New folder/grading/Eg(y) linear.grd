@@ -1,0 +1,11 @@
+Test file filegrading MB, 30-8-2013
+Example of a grading file for a property that is graded as a function of composition
+gives composition y in the first column
+gives band gap Eg in the second column
+In this example: Eg(y) = 1.1 + 0.2*y, in eV, thus linear from 1.1 eV (pure A material, y=0) to 1.3 eV (pureB material, y=1)
+interpolation: linear  (this is the key word for SCAPS)
+
+y (composition)	Eg(y)
+0.00	1.10000
+0.50	1.20000
+1.00	1.30000

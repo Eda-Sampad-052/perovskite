@@ -1,0 +1,51 @@
+> SCAPS 3.2.01 ELIS-UGent: Version scaps3201.exe, dated 12-11-2013, 16:33:22
+> SCAPS Material parameters file, saved on 	13-11-2013 at 19:01:04
+> 
+> Silicon parameters from Sze, Physics of Semiconductor devices, 2dn ed., 1981
+> But for:
+> Effective masses: average between "density of states effective mass" and "effective mass for Richardson constant" (both taken from Sze)
+> Thermal velocities from the website of Ioffe Institute, Russia
+> Radiative and Auger recombination from Tyagi, Introduction to semiconductor materials and devices, 1991
+> SRH recombination: single level assumed mid-gap, sigma_n and p, Nt set to obtain Ln and Lp around 100 micrometer
+> Optical absorption from file distributed with SCAPS
+> No doping type nor extrinsic doping is set! (NA = ND = 1E10/cm3 = about ni)
+> 
+> Should be OK for low doped silicon. For higher doping, the mobilities should be set to an appropriate lower value; the recombination then should adapt itself
+> 
+
+material name : low doped Si
+v_th_n :	 2.300e+07	 2.300e+07	 1.000e+01	 1.000e+01	 1.000e+01	 2.300e+07	 2.300e+07	 0	 0	[cm/s]
+v_th_p :	 1.650e+07	 1.650e+07	 1.000e+01	 1.000e+01	 1.000e+01	 1.650e+07	 1.650e+07	 0	 0	[cm/s]
+eps :	    11.900000	    11.900000	    1.000000	    10.000000	    10.000000	    11.900000	    11.900000	 0	 0	[-]
+chi :	  4.050000	  4.050000	  0.100000	  1.000000	  1.000000	  4.050000	  4.050000	 0	 0	[eV]
+Eg :	  1.120000	  1.120000	  0.100000	  1.000000	  1.000000	  1.120000	  1.120000	 0	 0	[eV]
+Nc :	 2.800000e+19	 2.800000e+19	 1.000000e+01	 1.000000e+01	 1.000000e+01	 2.800000e+19	 2.800000e+19	 0	 0	[/cm^3]
+Nv :	 1.040000e+19	 1.040000e+19	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.040000e+19	 1.040000e+19	 0	 0	[/cm^3]
+mu_n :	 1.500000e+03	 1.500000e+03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.500000e+03	 1.500000e+03	 0	 0	[cm^2/Vs]
+mu_p :	 4.500000e+02	 4.500000e+02	 1.000000e-03	 1.000000e+00	 1.000000e+00	 4.500000e+02	 4.500000e+02	 0	 0	[cm^2/Vs]
+Nd(uniform) :	 1.000000e+10	 1.000000e+10	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+10	 1.000000e+10	 0	 2	[/cm^3]
+Na(uniform) :	 1.000000e+10	 1.000000e+10	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+10	 1.000000e+10	 0	 2	[/cm^3]
+Tunneling in layer: 1 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 3.400000e-01	 3.400000e-01	 1.000000e+00	 1.000000e+00	 1.000000e+00	 3.400000e-01	 3.400000e-01	 0	 0	[-]
+Relative hole mass :	 6.000000e-01	 6.000000e-01	 1.000000e+00	 1.000000e+00	 1.000000e+00	 6.000000e-01	 6.000000e-01	 0	 0	[-]
+K_rad :	 1.800000e-15	 1.800000e-15	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e-15	 1.800000e-15	 0	 0	[cm^3/s]
+c_n_auger :	 3.000000e-31	 3.000000e-31	 1.000000e+01	 1.000000e+01	 1.000000e+01	 3.000000e-31	 3.000000e-31	 0	 0	[cm^6/s]
+c_p_auger :	 3.000000e-31	 3.000000e-31	 1.000000e+01	 1.000000e+01	 1.000000e+01	 3.000000e-31	 3.000000e-31	 0	 0	[m^6/s]
+absorption grading :	 1107.12	 1107.12	  250.00	  250.00	    0.00	 1107.12	 1107.12	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : Si.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : Si.abs
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  1 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.0100 [eV]
+Nt(uniform) :	 1.000000e+13	 1.000000e+13	 1.000000e+10	 1.000000e+00	 1.000000e+00	 1.000000e+13	 1.000000e+13	 0	 2	[/cm^3]
+leveltype : neutral	
+sigma_n : 1.000e-15	[cm^2]
+sigma_p : 1.000e-15	[cm^2]
+Et :   0.000	[eV]
+

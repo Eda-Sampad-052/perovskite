@@ -1,0 +1,44 @@
+// SCAPS script
+// to start from a "cleared state" (you can omit that)
+// be sure that a problem is loaded, this script does not do that
+clear all
+clear actions 
+action light 
+action iv.startv 0
+action iv.stopv 0.8 // or whatever final voltage you input
+action iv.increment 0.02
+action iv.doiv 
+action iv.continueaftervoc // do not stop after Voc is reached
+
+// calculate the IV curve, and store in vectors X(=V) and Y(=J)
+calculate singleshot 
+get iv xy
+// also store the efficiency parameters in the scalar script variables xvalue,..., uvalue
+get characteristics.eta xvalue
+get characteristics.voc yvalue
+get characteristics.jsc zvalue
+get characteristics.ff uvalue
+
+// derivate the IV curve and put the result in the Z vector (thus z = dV/dJ), and set the name of the Z vector
+math differentiate zyx // then Zvector contains dXvector/dYvector or dV/dJ
+// now the result is in kOhm.cm2 = V/(mA/cm2), and has to be converted to Ohm.cm2
+// temporarilly set  all elements of Wvector = 1000 (there are nx elements; nx has been set by get.iv)
+// show scriptvariables 
+math fillconstant W 1000 nx
+// then multiply all elements of Zvector = R_app with 1000, and store again in Z
+math vectormultiply ZWZ
+set scriptvariable.zname R_app=dV/dJ (Ohm.cm2) // and give an understandable name to Zvector
+
+// find the R_app value for V=0 and for V-Voc by interpolation, and put these in the script scalars  vvalue and wvalue
+// first temporarilly put wvalue = 0 (the short circuit voltage)
+set scriptvariable.wvalue 0
+math interpolate vZwX // interpolate Zvector(Xvector) representing dV_dJ(V) at V=wvalue (here 0) and put the result in vvalue
+math interpolate wZyX // interpolate Zvector(Xvector) representing dV_dJ(V) at V=yvalue (here Voc) and put the result in wvalue
+// show scriptvariables 
+
+// and make a plot of the incremental resistance
+plot draw xz
+
+
+
+

@@ -1,0 +1,406 @@
+> SCAPS 3.3.02 ELIS-UGent: Version scaps3302.exe, dated 28-08-2015, 11:48:47 Problem definition file
+> last saved by SCAPS: 	01-09-2015 at 13:35:20
+> 
+> 
+> File used by Peter Nollet, ELIS, UGent in his doctorate's thesis (january 2004)
+> to simulate a CdTe cell with activation treatment of the CdTe layer done in vacuum
+> Doctorate Peter (Ch. 7) and see also:
+> P. Nollet and M. Burgelman, “Results of consistent numerical simulation of CdTe thin film solar cells”, 
+> Proceedings of the 19th European Photovoltaic Solar Energy Conference (Paris, F, june 2004), 
+> pp. 1725-1728, WIP, München, 2004
+> 
+convergence
+
+recalculate mesh :  0 (0: fixed mesh, 1: adaptive mesh)
+
+
+back contact
+
+flatband : 0 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 0 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Fi_m :   5.4300 [eV]
+Sn :  1.000e+06 [m/s]
+Sp :  1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdTe
+d : 5.000e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 3.700e+04	 3.700e+04	 3.700e+04	 1.000e+00	 1.000e+00	 3.700e+04	 3.700e+04	 0	 0	[m/s]
+v_th_p :	 2.000e+05	 2.000e+05	 2.000e+05	 1.000e+00	 1.000e+00	 2.000e+05	 2.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  1.450000	  1.450000	  1.450000	  1.000000	  1.000000	  1.450000	  1.450000	 0	 0	[eV]
+Nc :	 7.900000e+23	 7.900000e+23	 7.900000e+23	 1.000000e+00	 1.000000e+00	 7.900000e+23	 7.900000e+23	 0	 0	[/m^3]
+Nv :	 1.300000e+25	 1.300000e+25	 1.300000e+25	 1.000000e+00	 1.000000e+00	 1.300000e+25	 1.300000e+25	 0	 0	[/m^3]
+mu_n :	 1.100000e-02	 1.100000e-02	 1.100000e-02	 1.000000e+00	 1.000000e+00	 1.100000e-02	 1.100000e-02	 0	 0	[m^2/Vs]
+mu_p :	 1.000000e-03	 1.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 4.000000e+20	 4.000000e+20	 4.000000e+20	 1.000000e+00	 1.000000e+00	 4.000000e+20	 4.000000e+20	 0	 0	[/m^3]
+Nd(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+absorption grading :	  855.16	  855.16	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CdTe IR adapted.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CdTe IR adapted.abs
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdTe
+d : 7.650e-06 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 3.700e+04	 3.700e+04	 3.700e+04	 1.000e+00	 1.000e+00	 3.700e+04	 3.700e+04	 0	 0	[m/s]
+v_th_p :	 2.000e+05	 2.000e+05	 2.000e+05	 1.000e+00	 1.000e+00	 2.000e+05	 2.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  1.450000	  1.450000	  1.450000	  1.000000	  1.000000	  1.450000	  1.450000	 0	 0	[eV]
+Nc :	 7.900000e+23	 7.900000e+23	 7.900000e+23	 1.000000e+00	 1.000000e+00	 7.900000e+23	 7.900000e+23	 0	 0	[/m^3]
+Nv :	 1.300000e+25	 1.300000e+25	 1.300000e+25	 1.000000e+00	 1.000000e+00	 1.300000e+25	 1.300000e+25	 0	 0	[/m^3]
+mu_n :	 1.100000e-02	 1.100000e-02	 1.100000e-02	 1.000000e+00	 1.000000e+00	 1.100000e-02	 1.100000e-02	 0	 0	[m^2/Vs]
+mu_p :	 7.000000e-03	 7.000000e-03	 7.000000e-03	 1.000000e+00	 1.000000e+00	 7.000000e-03	 7.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 3.000000e+19	 3.000000e+19	 3.000000e+19	 1.000000e+00	 1.000000e+00	 3.000000e+19	 3.000000e+19	 0	 0	[/m^3]
+Nd(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+absorption grading :	  855.16	  855.16	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CdTe IR adapted.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CdTe IR adapted.abs
+
+srhrecombination
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.5000 [eV]
+Nt(x) :	 7.700000e+20	 7.700000e+20	 7.700000e+20	 1.000000e+00	 1.000000e+00	 7.700000e+20	 7.700000e+20	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 7.700e+20 [/m^3]
+Nright : 7.700e+20 [/m^3]
+leveltype : 0/-	
+sigma_n : 3.000e-18	[m^2]
+sigma_p : 4.000e-16	[m^2]
+Et :   0.740	[eV]
+
+next
+
+type : donor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 2.700000e+19	 2.700000e+19	 2.700000e+19	 1.000000e+00	 1.000000e+00	 2.700000e+19	 2.700000e+19	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 2.700e+19 [/m^3]
+Nright : 2.700e+19 [/m^3]
+leveltype : +/0	
+sigma_n : 1.000e-24	[m^2]
+sigma_p : 1.000e-24	[m^2]
+Et :   0.300	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdTe
+d : 4.500e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 3.700e+04	 3.700e+04	 3.700e+04	 1.000e+00	 1.000e+00	 3.700e+04	 3.700e+04	 0	 0	[m/s]
+v_th_p :	 2.000e+05	 2.000e+05	 2.000e+05	 1.000e+00	 1.000e+00	 2.000e+05	 2.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  1.450000	  1.450000	  1.450000	  1.000000	  1.000000	  1.450000	  1.450000	 0	 0	[eV]
+Nc :	 7.900000e+23	 7.900000e+23	 7.900000e+23	 1.000000e+00	 1.000000e+00	 7.900000e+23	 7.900000e+23	 0	 0	[/m^3]
+Nv :	 1.300000e+25	 1.300000e+25	 1.300000e+25	 1.000000e+00	 1.000000e+00	 1.300000e+25	 1.300000e+25	 0	 0	[/m^3]
+mu_n :	 1.100000e-02	 1.100000e-02	 1.100000e-02	 1.000000e+00	 1.000000e+00	 1.100000e-02	 1.100000e-02	 0	 0	[m^2/Vs]
+mu_p :	 7.000000e-03	 7.000000e-03	 7.000000e-03	 1.000000e+00	 1.000000e+00	 7.000000e-03	 7.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 2.000000e+21	 2.000000e+21	 2.000000e+21	 1.000000e+00	 1.000000e+00	 2.000000e+21	 2.000000e+21	 0	 0	[/m^3]
+Nd(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+absorption grading :	  855.16	  855.16	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CdTe IR adapted.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CdTe IR adapted.abs
+
+srhrecombination
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 5.000000e+20	 5.000000e+20	 5.000000e+20	 1.000000e+00	 1.000000e+00	 5.000000e+20	 5.000000e+20	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 5.000e+20 [/m^3]
+Nright : 5.000e+20 [/m^3]
+leveltype : 0/-	
+sigma_n : 3.000e-18	[m^2]
+sigma_p : 4.000e-16	[m^2]
+Et :   0.740	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdTe
+d : 1.000e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 3.700e+04	 3.700e+04	 3.700e+04	 1.000e+00	 1.000e+00	 3.700e+04	 3.700e+04	 0	 0	[m/s]
+v_th_p :	 2.000e+05	 2.000e+05	 2.000e+05	 1.000e+00	 1.000e+00	 2.000e+05	 2.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	     1.000000	     1.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  1.450000	  1.450000	  1.450000	  1.000000	  1.000000	  1.450000	  1.450000	 0	 0	[eV]
+Nc :	 7.900000e+23	 7.900000e+23	 7.900000e+23	 1.000000e+00	 1.000000e+00	 7.900000e+23	 7.900000e+23	 0	 0	[/m^3]
+Nv :	 1.300000e+25	 1.300000e+25	 1.300000e+25	 1.000000e+00	 1.000000e+00	 1.300000e+25	 1.300000e+25	 0	 0	[/m^3]
+mu_n :	 1.100000e-02	 1.100000e-02	 1.100000e-02	 1.000000e+00	 1.000000e+00	 1.100000e-02	 1.100000e-02	 0	 0	[m^2/Vs]
+mu_p :	 7.000000e-03	 7.000000e-03	 7.000000e-03	 1.000000e+00	 1.000000e+00	 7.000000e-03	 7.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 2.000000e+21	 2.000000e+21	 2.000000e+21	 1.000000e+00	 1.000000e+00	 2.000000e+21	 2.000000e+21	 0	 0	[/m^3]
+Nd(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+absorption grading :	  855.16	  855.16	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : from file
+absorptionfile pure A material (y=0) : CdTe IR adapted.abs
+absorption pure B material (y=1), model : from file
+absorption pure B material (y=1), file : CdTe IR adapted.abs
+
+srhrecombination
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 5.000000e+20	 5.000000e+20	 5.000000e+20	 1.000000e+00	 1.000000e+00	 5.000000e+20	 5.000000e+20	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 5.000e+20 [/m^3]
+Nright : 5.000e+20 [/m^3]
+leveltype : 0/-	
+sigma_n : 3.000e-18	[m^2]
+sigma_p : 4.000e-16	[m^2]
+Et :   0.740	[eV]
+
+next
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 1.000000e+21	 1.000000e+21	 1.000000e+21	 1.000000e+00	 1.000000e+00	 1.000000e+21	 1.000000e+21	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+21 [/m^3]
+Nright : 1.000e+21 [/m^3]
+leveltype : 0/-	
+sigma_n : 1.200e-15	[m^2]
+sigma_p : 1.000e-15	[m^2]
+Et :   1.030	[eV]
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : CdS
+d : 7.000e-08 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 2.600e+05	 2.600e+05	 2.600e+05	 1.000e+00	 1.000e+00	 2.600e+05	 2.600e+05	 0	 0	[m/s]
+v_th_p :	 1.300e+05	 1.300e+05	 1.300e+05	 1.000e+00	 1.000e+00	 1.300e+05	 1.300e+05	 0	 0	[m/s]
+eps :	     9.000000	     9.000000	     9.000000	     1.000000	     1.000000	     9.000000	     9.000000	 0	 0	[-]
+chi :	  4.500000	  4.500000	  4.500000	  1.000000	  1.000000	  4.500000	  4.500000	 0	 0	[eV]
+Eg :	  2.420000	  2.420000	  2.420000	  1.000000	  1.000000	  2.420000	  2.420000	 0	 0	[eV]
+Nc :	 2.240000e+24	 2.240000e+24	 2.240000e+24	 1.000000e+00	 1.000000e+00	 2.240000e+24	 2.240000e+24	 0	 0	[/m^3]
+Nv :	 1.800000e+25	 1.800000e+25	 1.800000e+25	 1.000000e+00	 1.000000e+00	 1.800000e+25	 1.800000e+25	 0	 0	[/m^3]
+mu_n :	 3.400000e-02	 3.400000e-02	 3.400000e-02	 1.000000e+00	 1.000000e+00	 3.400000e-02	 3.400000e-02	 0	 0	[m^2/Vs]
+mu_p :	 1.000000e-03	 1.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+Nd(y) :	 5.000000e+22	 5.000000e+22	 5.000000e+22	 1.000000e+00	 1.000000e+00	 5.000000e+22	 5.000000e+22	 0	 0	[/m^3]
+absorption grading :	  512.39	  512.39	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B
+A : 1.500e+07 [/(m*sqrt(eV))]
+B : 0.000e+00 [sqrt(eV)/m]
+absorption pure B material (y=1), model : coefficients A and B
+pure B material (y=1), A : 1.500e+07 [/(m*sqrt(eV))]
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m]
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 1.000000e+24	 1.000000e+24	 1.000000e+24	 1.000000e+00	 1.000000e+00	 1.000000e+24	 1.000000e+24	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+24 [/m^3]
+Nright : 1.000e+24 [/m^3]
+leveltype : neutral	
+sigma_n : 1.000e-16	[m^2]
+sigma_p : 1.000e-16	[m^2]
+Et :   1.600	[eV]
+
+next
+
+type : acceptor ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.0000 [eV]
+Nt(x) :	 2.000000e+22	 2.000000e+22	 2.000000e+22	 1.000000e+00	 1.000000e+00	 2.000000e+22	 2.000000e+22	 0	 1	[/m^3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 2.000e+22 [/m^3]
+Nright : 2.000e+22 [/m^3]
+leveltype : 0/-	
+sigma_n : 1.000e-24	[m^2]
+sigma_p : 1.000e-15	[m^2]
+Et :   1.000	[eV]
+
+interface properties
+
+interfacename : CdS
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+interface recombination
+
+type : neutral
+sigma_nleft : 1.000e-16 [m^2]
+sigma_nright : 1.000e-16 [m^2]
+sigma_pleft : 1.000e-16 [m^2]
+sigma_pright : 1.000e-16 [m^2]
+Tunneling to trap: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+energy distribution : single
+Reference for defect energy :  7 ; 3 = above highest EV; 4 = below lowest EC; 5 = above Ei left; 6 = above Ei right; 7 = above EV left (= SCAPS%<2.7 reference); 8 = above EV right; 9 = above middle of interface gap
+Et :  1.20 [eV]
+Ekar :  0.10 [eV]
+N : 1.000e+16 [/m^2]
+
+
+layer
+
+name : ITO
+d : 3.000e-07 [m]
+composition grading :	  0.00000	  1.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 1	[-]
+v_th_n :	 2.000e+05	 2.000e+05	 2.000e+05	 1.000e+00	 1.000e+00	 2.000e+05	 2.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+05	 1.000e+00	 1.000e+00	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	     8.900000	     8.900000	     8.900000	     1.000000	     1.000000	     8.900000	     8.900000	 0	 0	[-]
+chi :	  4.800000	  4.800000	  4.800000	  1.000000	  1.000000	  4.800000	  4.800000	 0	 0	[eV]
+Eg :	  3.650000	  3.650000	  3.650000	  1.000000	  1.000000	  3.650000	  3.650000	 0	 0	[eV]
+Nc :	 5.200000e+24	 5.200000e+24	 5.200000e+24	 1.000000e+00	 1.000000e+00	 5.200000e+24	 5.200000e+24	 0	 0	[/m^3]
+Nv :	 1.000000e+24	 1.000000e+24	 1.000000e+24	 1.000000e+00	 1.000000e+00	 1.000000e+24	 1.000000e+24	 0	 0	[/m^3]
+mu_n :	 1.000000e-03	 1.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 0	 0	[m^2/Vs]
+mu_p :	 1.000000e-03	 1.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 0	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(y) :	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0	 0	[/m^3]
+Nd(y) :	 1.000000e+26	 1.000000e+26	 1.000000e+26	 1.000000e+00	 1.000000e+00	 1.000000e+26	 1.000000e+26	 0	 0	[/m^3]
+absorption grading :	  339.72	  339.72	  250.00	  250.00	    0.00	    1.20	    1.20	 0	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B
+A : 1.000e+08 [/(m*sqrt(eV))]
+B : 0.000e+00 [sqrt(eV)/m]
+absorption pure B material (y=1), model : coefficients A and B
+pure B material (y=1), A : 1.000e+08 [/(m*sqrt(eV))]
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m]
+
+srhrecombination
+
+type : neutral ( 1 level(s) )
+energy distribution : single
+Reference for defect energy :  0 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Ekar :  0.1000 [eV]
+Nt(x) :	 1.000000e+25	 1.000000e+25	 1.000000e+25	 1.000000e+00	 1.000000e+00	 1.000000e+25	 1.000000e+25	 1	 1	[/m^3]
+profile : linear
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+25 [/m^3]
+Nright : 1.000e+25 [/m^3]
+leveltype : neutral	
+sigma_n : 1.000e-16	[m^2]
+sigma_p : 1.000e-16	[m^2]
+Et :   1.800	[eV]
+
+
+front contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+03 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+optical filter : transmission
+wavelength independent: 0
+filterfile : 82%transmission.ftr
+
+working point
+
+illuminated from : right
+internal Rfront :   0.00000000
+internal Tfront :  1.0000e+00
+voltage V applied to : -1 (+1: right contact; -1: left contact)
+cell reference system :  1 (1: as a consumer (consumed power = +VJ; 0: as a generator (generated power = +VJ) )

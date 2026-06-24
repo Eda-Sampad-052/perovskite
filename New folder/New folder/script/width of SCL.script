@@ -1,0 +1,179 @@
+// MB 14-12-2020
+// A script just meant to illustrate some of the possibilities of the set, get and math commands
+// ... and using more scriptvalues and vectors than just (x,y,z,u,v,w)
+// calculate the space charge layer (SCL) with in three ways:
+// once from the inverse of the capacitance
+// and once from an estimated position of the left and right edges of the SCL
+// and finally with the standard text book equation (W proportional to sqrt(1/Neff) )
+
+clear all
+load definitionfile simple pn.def // is always in the SCAPS distribution
+clear actions
+action cv.docv 
+action dark 
+action cv.startv 0
+action cv.stopv 0
+action cv.points 2 // do a CV simulation from 0 V to 0 V // 2 points is the minimum in SCAPS :-(
+action workingpoint.frequency 1 
+// when NA is set really low (<1E13/cm3)
+// the depletion capacitance cannot follow the standard 1 MHz working point frequency; so trake 1 Hz
+
+// set layer1.thickness 20 
+// make it a little thicker than in the standard simple pn.def (to accomodate the SCL at weak doping)
+set layer2.nd 1E18 // and a little more n+ type
+
+math filllogarithmicperdecade n 1E12 1E18 5 // will serve as NA // also sets script variable nu
+math filllogarithmic d 100 1 nn// will serve as thickness p-layer
+// for convergence reasons: when NA high, convergence is not good for thick layers
+// however, thick layers (> depletion thickness) are needed to avoid avoid limitation to geometric capacity
+
+set scriptvariable.maxiteration nn
+//set scriptvariable.maxiteration 4 // to limit a bit during test
+// reserve space for result vectors
+set scriptvariable.nd maxiteration
+set scriptvariable.ni maxiteration
+set scriptvariable.nm maxiteration
+set scriptvariable.nn maxiteration
+set scriptvariable.nl maxiteration
+set scriptvariable.nr maxiteration
+set scriptvariable.nt maxiteration
+set scriptvariable.nv maxiteration
+set scriptvariable.nw maxiteration
+set scriptvariable.ny maxiteration
+set scriptvariable.nz maxiteration
+
+set scriptvariable.dname d(p-layer)  (µm)
+set scriptvariable.iname Vbi (Volt)
+set scriptvariable.nname NA(p-layer) (1/cm3)
+set scriptvariable.lname left edge of SCL (µm)
+set scriptvariable.mname Neff (1/cm3) // =NA*ND/(NA+ND)
+set scriptvariable.rname right edge of SCL (µm)
+set scriptvariable.tname |fromEq-fromSCL| (relative)
+set scriptvariable.vname W from C (µm)
+set scriptvariable.wname W from edges SCL (µm)
+set scriptvariable.yname W from equation (µm)
+set scriptvariable.zname  |fromC-fromSCL| (relative)
+
+set scriptvariable.ivalue 1.45E10 // ni of silicon (1/cm3)
+math scalarmultiply iii // now i value contains ni*ni
+set scriptvariable.kvalue 0.025 // kT/q at room temperature (Volt)
+set scriptvariable.qvalue 1.602E-19 // the elementary charge q (C)
+set scriptvariable.evalue 8.85E-14 // physical constant epsilon_0 in F/cm; e of "epsilon"
+get layer1.epsilon rvalue // eps_s (relative); r of "relative"
+math scalarscale ge 2.0 // gvalue contains 2*eps_0
+math scalarmultiply ggr // gvalue contains 2*eps_0*eps_s
+math scalardivide ggq // gvalue contains 2*eps_0*eps_s/q, a factor used in the analytical equation for W(N)
+set scriptvariable.hvalue 0.5 // an exponent in the analytical equation or W
+set scriptvariable.dvalue 1E4 // conversionfactor from cm to micrometer
+
+set scriptvariable.fvalue 1E13 // conversion factor to get W in µm when C is in nF and eps in F/cm
+math scalarmultiply zer
+math scalarmultiply zzf // now multiplication with zvalue will convert 1/C (in 1/nF) into W (in µm)
+
+set scriptvariable.yvalue 0.50 // criterion for "edge of SCL": p=yvalue*NA (left edge) and n = yvalue*ND (right edge)
+// 0.5 seems to give a nice result; you can play with this criterion
+
+//show scriptvariables
+ 
+loop start
+
+//in each iteration of the loop, set a new value for the acceptor doping density NA of the p layer
+set scriptvariable.pvalue nvector[loopcounter]
+set layer1.na  pvalue
+// get ND(n-layer and calculate Neff
+get layer2.nd nvalue
+math scalaradd mnp // now mvalue = NA+ND
+math scalarreciproque mm // now mvalue = 1/(NA+ND)
+math scalarmultiply mmp // now mvalue = NA/(NA+ND)
+math scalarmultiply mmn // now mvalue = ND* NA/(NA+ND)
+set scriptvariable.mvector[loopcounter] mvalue // and store it in mvector; it is the effective doping density
+// calculate Vbi
+math scalarmultiply vnp // evaluate NA*ND
+math scalardivide vvi // divide by nivalue = ni^2, obtaining NA*ND/ni2
+math scalarlog vv // obtaining ln(NA*ND/ni2)
+math scalarmultiply vkv // obtaining vvalue = Vbi = (kT/q)*ln(NA*ND/ni2)
+set scriptvariable.ivector[loopcounter] vvalue // and store it in result vactor ivector
+// calculate W from the analytical equation
+math scalarmultiply svg // obtaining (2*eps_0*eps_s/q)*Vbi
+math scalardivide ssm // obtaining  (2*eps_0*eps_s/q)*Vbi/Neff
+math scalarpower ssh // obtaining  [ (2*eps_0*eps_s/q)*Vbi/Neff]^0.5 = W (in cm)
+math scalarmultiply ssd // obtaining W in micrometer
+set scriptvariable.yvector[loopcounter] svalue // and store W(from Equation) in yvector
+// show scriptvariables 
+
+// and adapt the p layer thickness so that it accomodates the SCL thickness (but not too much more - for convergence reasons)
+set layer1.thickness dvector[loopcounter] 
+//show scriptvariables
+ 
+calculate singleshot 
+
+// first calculate W as the difference between the right edge and the eft edge of the SCL
+
+// determine the left edge of the SCL: find x where p(x) = yvalue*NA
+get energybands.p xh // now p(x) is in hvector (h of "hole")
+get layer1.na pvalue
+math scalarmultiply pyp // now pvalue contains yvalue*NA(layer1)
+math interpolate lXpH // finds lvalue for which xvector (=position x) would correspond to 
+// (by interpolation) a value of pvalue (=yvalue*NA) in hvector (=p(x) )
+// now lvalue contains the left edge of the SCL; write it in lvector
+set scriptvariable.lvector[loopcounter] lvalue
+//show scriptvariables
+
+// determine the right edge of the SCL: find x where n(x) = yvalue*ND
+get energybands.n xe // now n(x) is in evector (e of "electron")
+math scalarmultiply nyn // now nvalue contains yvalue*ND(layer2)
+math interpolate xXnE // finds xvalue for which xvector (=position x) would correspond to 
+// (by interpolation) a value of nvalue (=yvalue*ND) in evector (=n(x) 
+// now xvalue contains the right edge of the SCL; write it in rvector
+set scriptvariable.rvector[loopcounter] xvalue
+//show scriptvariables
+
+// the SCL width from the edges of the SCL is rvector - lvector
+math scalarsubtract wxl //wvalue = xvalue - lvalue  
+// wvalue contains thus the total SCL width; write it in wvector
+set scriptvariable.wvector[loopcounter] wvalue 
+// wvector contains the SCL position calculated with p = NA/2 and n=ND/2 (or another fraction, if yvalue is different from 0.5)
+// show scriptvariables 
+
+// then calculate W from the inverse of the capacitance
+get cv uc // uvector contains V (two values startv=stopv=0) and cvector the corresponding capacity 
+set scriptvariable.cvalue cvector[0] // contains C in nF/cm2
+math scalarreciproque cc // now cvalue contains 1/C in 1/nF
+math scalarmultiply czc // now cvalue contains W in µm from the capacity
+set scriptvariable.vvector[loopcounter] cvalue // and place it in vvector
+// show scriptvariables 
+
+loop stop
+
+// show scriptvariables 
+
+// calculate the relative (absolute value of the) deviation between W(from C) - W(from SCL)
+math vectorsubtract zvw
+math vectorabs zz
+math vectordivide zzw // now zvector contains |W(from C) - W(from edge SCL)|/W(from edge SCL)
+//show scriptvariables 
+
+// calculate the relative (absolute value of the) deviation between W(from Eq.) - W(from SCL)
+math vectorsubtract tyw
+math vectorabs tt
+math vectordivide ttw // now zvector contains |W(from C) - W(from edge SCL)|/W(from edge SCL)
+//show scriptvariables 
+
+plot draw nv
+plot draw nw
+plot draw ny
+plot draw nz
+plot draw nt
+plot draw nm
+plot draw ni
+
+show scriptvariables 
+
+
+
+
+
+
+
+
+

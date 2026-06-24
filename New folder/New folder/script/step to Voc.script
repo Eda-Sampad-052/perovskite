@@ -1,0 +1,94 @@
+// SCAPS script
+// Marc B., ELIS - UGent 22-1-2025
+// SCAPS 3.3.12 of 22-1-2025 or more recent is needed
+// determine the Voc of a cell with (much) better accuracy than the standard SCAPS method
+// that standard method is: do one single IV simulation, and interpollate linearly around the Voc point
+// the (simple!) algorithm used here is: start from 0 V, and advance with steps of 0.1 V
+// calculate J at each V
+// if you overshoot the Voc point (= if J changes sign), return with smaller steps, and so on...
+
+// this illustrates the use of new script commands: ... sign, if-commands
+
+clear all
+
+load definitionfile simple pn.def
+
+// initialisations
+set scriptvariable.maxiteration 80
+math fillconstant v 0 maxiteration // to store successive estimates of Voc
+math fillconstant j 0 maxiteration // to store the current at estimated Voc
+math fillconstant d 0 maxiteration // to store corrections to Voc
+math fillconstant f 0 maxiteration // multiplyer for the Voc corrections
+math fillconstant s 0 maxiteration // sign of the old js
+math fillconstant n 0 maxiteration // sign of the new j
+math fillconstant t 0 maxiteration // test for reversal of Voc-step
+
+set scriptvariable.name.vvector Voc (Volt)
+set scriptvariable.name.jvector J(Voc) (mA/cm2)
+set scriptvariable.name.dvector dVoc (Volt)
+set scriptvariable.name.fvector factor
+set scriptvariable.name.svector sign of old j
+set scriptvariable.name.nvector sign of new j
+set scriptvariable.name.tvector test for step reversal
+
+set scriptvariable.name.vvalue Voc (Volt)
+set scriptvariable.name.jvalue J(Voc) (mA/cm2)
+set scriptvariable.name.dvalue dVoc (Volt)
+set scriptvariable.name.fvalue factor
+set scriptvariable.name.svalue sign of old j
+set scriptvariable.name.nvalue sign of new j
+set scriptvariable.name.tvalue test for step reversal
+
+set scriptvariable.vvalue 0.0 // initial guess of Voc, Volt
+set scriptvariable.dvalue +0.1 // initial step to change Voc estimate, Volt
+set scriptvariable.fvalue +1.0
+
+action light
+action workingpoint.voltage vvalue
+
+calculate singleshot // at working point 
+get energybands.jtotal_scalar jvalue
+
+loop start
+
+set scriptvariable.vvector[loopcounter] vvalue
+set scriptvariable.jvector[loopcounter] jvalue
+set scriptvariable.dvector[loopcounter] dvalue
+set scriptvariable.fvector[loopcounter] fvalue
+math scalarsign sj // store the sign of j in svalue (s for sign)
+
+math scalaradd vvd // increment the Voc estimate // the new Voc
+action workingpoint.voltage vvalue // and set the work point voltage to that
+// calculate j at this new workpoint
+calculate singleshot // at working point 
+get energybands.jtotal_scalar jvalue // the new j
+math scalarsign nj // store the sign of j in nvalue (n for new sign)
+
+// did we cross j=0 in this step? if not, continue; if so, reverse step direction and take smaller steps
+math scalarmultiply tns // tvalue is the product of the old and the new sign of j (t for test)
+math if.greater tvalue 0.0 fvalue 1.0 -0.3 // sets the new factor in favlue: +1 = proceed with same step; -0.3 = return with smaller steps
+math scalarmultiply dfd // multiply dVoc with the new factor:
+
+set scriptvariable.svector[loopcounter] svalue
+set scriptvariable.nvector[loopcounter] nvalue
+set scriptvariable.tvector[loopcounter] tvalue
+
+loop stop
+
+plot drawversusindex v
+plot drawversusindex j
+plot drawversusindex d
+
+show scriptvariables
+// when viewing these graphs, take profit of the new "absolute value"-button
+// placed on the Script Plot Panel 
+
+// ... and then ones sees that Voc = 0.739 723 894 356... Volt
+// giving a current density J = 4E-9 mA/cm2 = 4 pA/cm2, or about 1E-10 of Jsc...
+// (however, do not trust all this "accuracy" too much...)
+// the method used here is maybe safe (it does lead to the good result)
+// but is rather slow, and thus not so efficient 
+// (several tens of iteratons (steps) are needed to obtain a satifying accuracy...)
+
+
+

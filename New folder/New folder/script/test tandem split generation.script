@@ -1,0 +1,165 @@
+// SCAPS script
+clear all
+clear actions
+
+// set the definition file of the tandem under study once and for all
+set scriptvariable.filename test tandem cell scripts illum from left.def
+// set scriptvariable.filename test tandem cell scripts illum from left very low alpha.def
+load definitionfile filename
+
+calculate equilibrium_only // just enough to set the mesh
+get layer2.rightindex dindex
+get layer2.rightx dvalue // the position of the split between top cell and bottom cell
+
+action light
+action lightflux_specified 
+action iv.startv -0.50
+action iv.stopv 1.5
+action iv.increment 0.02
+action iv.stopaftervoc 
+//show scriptvariables
+
+set scriptvariable.maxiteration 10
+math filllinear.fixednumberofpoints P 0.1 1 maxiteration // P is the parameter of this simulation: P = Rback
+set scriptvariable.pname Rback (%) //light from left, thus the back side is right
+set contactright.opticalfilter.reflection 
+
+// to store efficiency results for top, bottom and tandem
+math fillconstant E 0.0 2
+math fillconstant O 0.0 2
+math fillconstant S 0.0 2
+math fillconstant F 0.0 2
+set scriptvariable.ename collection efficiency (%)
+set scriptvariable.oname Voc (Volt)
+set scriptvariable.sname Jsc (mA/cm2)
+set scriptvariable.fname FF (%)
+// to store efficiency results for for tandem alone
+math fillconstant A 0.0 maxiteration
+math fillconstant C 0.0 maxiteration
+math fillconstant D 0.0 maxiteration
+math fillconstant M 0.0 maxiteration
+math fillconstant Q 0.0 maxiteration
+set scriptvariable.aname tandem coll. eff. (%)
+set scriptvariable.cname tandem Voc (Volt)
+set scriptvariable.dname tandem Jsc (mA/cm2)
+set scriptvariable.mname tandem FF (%)
+set scriptvariable.qname tandem eta (%)
+
+loop start
+
+load definitionfile filename
+set contactright.opticalfilter.value pvector[loopcounter]
+action lightflux_specified // we want the generation calculations to be done based on an incident spectrum
+
+math split_tandem_cell.adapt_generation 2 3
+
+get scapsinputfile.generation xg temporary tandem cell G(x).gen
+set scriptvariable.xname x(tandem), µm // the names have been set just above, but make them more clear, mention "tandem"
+set scriptvariable.gname tandem G(x), #/cm3/s
+plot draw xg
+//show scriptvariables 
+
+action light 
+action generation_specified 
+action iv.doiv
+action iv.stopaftervoc 
+get action.pin.in_cell pvalue // the incident power, in W/m2, as displayedin the Action Panel
+
+load definitionfile.temporary.top_cell 
+load generationfile.temporary.top_cell 
+calculate singleshot 
+get iv UJ
+get gx yt
+set scriptvariable.yname top x, µm
+set scriptvariable.tname top G(x), #/cm3/s
+set scriptvariable.uname top V, Volt
+set scriptvariable.jname top J, mA/cm2
+plot draw yt
+get characteristics.eta evalue // generationmode set: thus, this is collection efficiency, not power conversion efficiency!
+get characteristics.voc ovalue
+get characteristics.jsc svalue
+get characteristics.ff fvalue
+set scriptvariable.evector[-1] evalue
+set scriptvariable.ovector[-1] ovalue
+set scriptvariable.svector[-1] svalue
+set scriptvariable.fvector[-1] fvalue
+// show scriptvariables 
+
+load definitionfile.temporary.bottom_cell 
+load generationfile.temporary.bottom_cell 
+calculate singleshot 
+get iv WK
+get gx zb
+math vectoroffset ZZ dvalue
+set scriptvariable.zname bottom x, µm
+set scriptvariable.bname bottom G(x), #/cm3/s
+set scriptvariable.wname bottom V, Volt
+set scriptvariable.kname bottom J, mA/cm2
+plot draw zb
+get characteristics.eta evalue // generationmode set: thus, this is collection efficiency, not poweer conversion efficiency!
+get characteristics.voc ovalue
+get characteristics.jsc svalue
+get characteristics.ff fvalue
+set scriptvariable.evector[-1] evalue
+set scriptvariable.ovector[-1] ovalue
+set scriptvariable.svector[-1] svalue
+set scriptvariable.fvector[-1] fvalue
+// show scriptvariables 
+
+// now make the series (tandem) connection)
+math series VIUJWK 100
+set scriptvariable.vname tandem V, Volt
+set scriptvariable.iname tandem J, mA/cm2
+plot draw vi
+
+math characteristics.eta eVI
+math characteristics.voc oVI
+math characteristics.jsc sVI
+math characteristics.ff fVI
+set scriptvariable.evector[-1] evalue
+set scriptvariable.ovector[-1] ovalue
+set scriptvariable.svector[-1] svalue
+set scriptvariable.fvector[-1] fvalue
+set scriptvariable.avector[loopcounter] evalue
+set scriptvariable.cvector[loopcounter] ovalue
+set scriptvariable.dvector[loopcounter] svalue
+set scriptvariable.mvector[loopcounter] fvalue
+// calculate the efficiency from Voc*Jsc*FF/Pin and adjust units to btain percent
+math scalarmultiply qos // already qvalue = V0c*Jsc
+math scalarmultiply qqf // now qvalue = V0c*Jsc*FF
+math scalardivide qqp // now qvalue = Voc*Jsc*FF/Pin  
+math scalarscale qq 10 // now eta in %
+set scriptvariable.qvector[loopcounter] qvalue
+
+//show scriptvariables 
+
+// plot the IV curves of top,bottom and tandem at each parameter
+plot draw uj
+plot draw wk
+plot draw vi
+
+loop stop
+
+// plot the tandem efficiency parameters as a function of the parameter p
+plot drww pa
+plot draw pc
+plot draw pd
+plot draw pm
+plot draw pq
+
+show scriptvariables 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+> A generation file made by hand
+> Uniform generation density, defined at a few "own" mesh points
+> The total generation corresponds to the SCAPS calculation of AM1_5G 1 sun.spe incident on simple pn.def
+> MB 28-3-2011
+>
+> x (µm)	Geh (#/m3.s)
+0	9.70E+26
+0.5	9.70E+26
+1.0	9.70E+26
+1.5	9.70E+26
+2.0	9.70E+26
+2.5	9.70E+26

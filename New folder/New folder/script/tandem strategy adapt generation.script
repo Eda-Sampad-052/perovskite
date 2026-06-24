@@ -1,0 +1,94 @@
+// SCAPS script
+// with strategy: set spectrum file with llight transmitted through top cell
+// do not clear all: we still need 4 script variables here: filename, and the split positions iindex and jindex, and the split position x-value
+// however, other things can (and should) be cleared
+clear actions 
+clear simulations 
+clear plot 
+clear scriptgraphs 
+
+// set scriptvariable.filename test tandem from left.def
+// set scriptvariable.iindex 2 // the layer number just before the tandem split
+// set scriptvariable.jindex 3 // the layer number just after the tandem split
+// or, filename and the splitpositions,  could have been passed from another script
+// if so, outcomment the 3 set scriptvariables commands above
+
+// show scriptvariables 
+load definitionfile filename
+
+action light
+action lightflux_specified 
+load spectrumfile AM1_5G 1 sun.spe // the spectrum that was set above to evaluate the tandem
+
+math split_tandem_cell.adapt_generation iindex jindex
+
+// show scriptvariables
+action light
+action generation_specified
+
+//set the actions for simulation
+action iv.startv -0.3 // you should experiment with this a little to obtain a nice tandem IV curve
+action iv.stopv 2.0
+action iv.increment 0.02
+action iv.stopaftervoc 
+action iv.doiv
+// a QE response is not possible/relevant when illumination comes from a G(x) file (there is no wavelength in it)
+
+// show scriptvariables 
+
+// first do the top cell
+load definitionfile.temporary.top_cell 
+load generationfile.temporary.top_cell 
+calculate singleshot 
+get iv vt // V in vvector, J in tvector (t for top)
+get characteristics.eta avalue
+get characteristics.voc bvalue
+get characteristics.jsc cvalue
+get characteristics.ff dvalue
+set scriptvariable.name.avalue eff.top (%)// and set readable names
+set scriptvariable.name.bvalue Voc top (V)
+set scriptvariable.name.cvalue Jsc top (mA/cm2)
+set scriptvariable.name.dvalue FF top (%)
+
+// show scriptvariables 
+
+// and now do the bottom cell 
+load definitionfile.temporary.bottom_cell 
+load generationfile.temporary.bottom_cell 
+calculate singleshot 
+get iv ub // V in uvector, J in bvector (b for bottom)
+get characteristics.eta evalue
+get characteristics.voc fvalue
+get characteristics.jsc gvalue
+get characteristics.ff hvalue
+set scriptvariable.name.evalue eff.bot (%)// and set readable names
+set scriptvariable.name.fvalue Voc bot (V)
+set scriptvariable.name.gvalue Jsc bot (mA/cm2)
+set scriptvariable.name.hvalue FF bot (%)
+// show scriptvariables 
+
+// now do the tandem connection
+math series wjvtub 100 // Vtandem in wvector, Jtandem in jvector
+
+math characteristics.eta iwj // processes V-data in Wvector, J-data in Jvector, and places result eta in ivalue
+math characteristics.voc jwj
+math characteristics.jsc kwj
+math characteristics.ff lwj 
+
+set scriptvariable.name.ivalue eff.tandem (%)// and set readable names
+set scriptvariable.name.jvalue Voc tandem (V)
+set scriptvariable.name.kvalue Jsc tandem (mA/cm2)
+set scriptvariable.name.lvalue FF tandem (%)
+
+// and makje the IV plots
+plot draw vt
+plot draw ub
+plot draw wj
+
+show scriptvariables 
+save scriptvariables Abdullahi adapt Gen.txt // the default folder is [scaps]/results
+
+
+
+
+

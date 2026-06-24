@@ -1,0 +1,65 @@
+set errorhandling.toscreen 
+clear scriptvariables.all 
+clear simulations 
+
+load definitionfile simple pplus-n.def
+action dark
+set scriptvariable.vvalue 0.3 // set here the voltage at which to evalue EFp(W)
+action workingpoint.voltage 0
+action iv.startv 0
+action iv.stopv vvalue
+action iv.doiv  // doing an I-V calculation is required to enable extraction of data (workpoint alone is not enough)
+
+set scriptvariable.xname x (micrometer)
+set scriptvariable.yname n (1/cm3)
+set scriptvariable.zname EFp(x) (eV)
+set scriptvariable.uname W(micrometer)
+set scriptvariable.vname ND (1/cm3)
+set scriptvariable.wname EFp(W) (eV)
+
+math filllogarithmic.perdecade v 1E13 1E17 2
+set scriptvariable.nu nv // reserve space for uvector, size equal to size of vvector
+set scriptvariable.nw nv // reserve space for wvector, size equal to size of vvector
+show scriptvariables
+
+loop maxiteration nv
+set scriptvariable.maxerror 1E-10 // low enoough so that loop will not stop because of error small enough
+set scriptvariable.looperror 1e10 // so large that the loop will continue
+set scriptvariable.uvalue 0.5 // criterion to set the edge of the SCL: it is at n(W) = uvalue*ND
+get layer1.thickness wvalue
+
+loop start 
+set layer2.nd vvector[loopcounter] // vary the donor doping of the "n-junction" layer
+set layer3.nd vvector[loopcounter] // vary the donor doping of the "n-bulk" layer // both layers should be identical
+set scriptvariable.vvalue vvector[loopcounter] // now ND is in the scalar vvalue
+math scalarmultiply yuv // now yvalue contains ND/2 (as uvalue was set to 0.5)
+
+calculate singleshot 
+
+get energybands.n XY // now the electron density n(x) is in yvector, and (again) the mesh x in xvector
+math interpolate xXyY // finds (by interpolation) xvalue for which n(xvalue) = ND/2 of find xvalue = x(ND/2) or xvalue(yvalue) from table X(Y)
+// thus: xvalue is now the position W of the SCL edge in the n-layer, meaasured from the left (x=0)
+
+get energybands.efp XZ // now zvector contains EFp(x)
+math closestindex zxX // now zindex contains the index Xvector that has a value closest to xvalue = W 
+set scriptvariable.mode zindex
+set scriptvariable.zvalue zvector[mode]
+set scriptvariable.wvector[loopcounter] zvalue // and set this EFp(W) value in wvector
+
+// now subtract thicknessof p layer, to get W measured from junction
+math scalarsubtract xxw
+set scriptvariable.uvector[loopcounter] xvalue //and place this value in uvector
+
+show scriptvariables
+
+loop stop 
+
+show scriptvariables
+
+plot draw vu // thus W vs.ND
+plot draw vw // thus EFp(W) vs.ND
+
+
+
+
+

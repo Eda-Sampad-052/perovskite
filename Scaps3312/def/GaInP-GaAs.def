@@ -1,0 +1,363 @@
+> SCAPS 3.3.12 ELIS-UGent: Version scaps3312.exe, dated 07-10-2024, 11:45:28 Problem definition file
+> last saved by SCAPS: 	25-05-2025 at 18:05:59
+> 
+> 
+> Problem definition file distributed with SCAPS2.8, may 2009
+> Method 3:
+> A linear graded pn junction is implemented in two layers.
+> Both layers have a uniform composition (no grading), 
+> but a position dependent, linear profile for NA(x) is set in the left layer, 
+> and a position dependent, linear profile for ND(x) is set in the right layer. 
+> Thus, the pn junction is symmetric.
+> This is a better way to define such problem then "method 1" or "Method 2,"
+> since the position where > "everything is happening" (thus around the interface between the two layers),
+> the mesh points are crowded. See e.g. the dip in the |rho(x)| plot (EB panel, top right)
+> which is much more detailed than with the problems 
+> linear single layer N(x).def ("Method 1") and
+> linear single layer N(y).def ("Method 2").
+> However, no appreciable difference is seen in the I-V curves calculated with the three "methods".
+> 
+back contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn :  1.000e+03 [m/s]
+Sp :  1.000e+05 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : ITO
+d : 1.000e-07 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	     9.000000	    10.000000	    10.000000	    10.000000	    10.000000	     9.000000	     9.000000	 1	 0	[-]
+chi :	  4.000000	  4.500000	  1.000000	  1.000000	  1.000000	  4.000000	  4.000000	 1	 0	[eV]
+Eg :	  3.500000	  1.200000	  0.500000	  1.000000	  1.000000	  3.500000	  3.500000	 1	 0	[eV]
+Nc :	 2.200000e+24	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 2.200000e+24	 2.200000e+24	 1	 0	[/m^3]
+Nv :	 1.800000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e+25	 1.800000e+25	 1	 0	[/m^3]
+mu_n :	 2.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.000000e-03	 2.000000e-03	 1	 0	[m^2/Vs]
+mu_p :	 1.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+26	 1.000000e+26	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+26	 1.000000e+26	 0	 2	[/m^3]
+absorption grading :	  354.28	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 5.345e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : ETL
+d : 5.000e-08 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	 0	 0	[-]
+chi :	  4.000000	  4.500000	  1.000000	  1.000000	  1.000000	  4.000000	  4.000000	 1	 0	[eV]
+Eg :	  3.200000	  1.200000	  0.500000	  1.000000	  1.000000	  3.200000	  3.200000	 1	 0	[eV]
+Nc :	 2.200000e+24	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 2.200000e+24	 2.200000e+24	 1	 0	[/m^3]
+Nv :	 1.080000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.080000e+25	 1.080000e+25	 1	 0	[/m^3]
+mu_n :	 1.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 1	 0	[m^2/Vs]
+mu_p :	 5.000000e-04	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 5.000000e-04	 5.000000e-04	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 2	[/m^3]
+absorption grading :	  387.49	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 5.590e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : GaInP
+d : 1.000e-06 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    11.600000	    10.000000	    10.000000	    10.000000	    10.000000	    11.600000	    11.600000	 1	 0	[-]
+chi :	  4.100000	  4.500000	  1.000000	  1.000000	  1.000000	  4.100000	  4.100000	 1	 0	[eV]
+Eg :	  1.850000	  1.200000	  0.500000	  1.000000	  1.000000	  1.850000	  1.850000	 1	 0	[eV]
+Nc :	 4.700000e+23	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 4.700000e+23	 4.700000e+23	 1	 0	[/m^3]
+Nv :	 1.800000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e+25	 1.800000e+25	 1	 0	[/m^3]
+mu_n :	 3.000000e-02	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 3.000000e-02	 3.000000e-02	 1	 0	[m^2/Vs]
+mu_p :	 1.000000e-02	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-02	 1.000000e-02	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+23	 1.000000e+23	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+23	 1.000000e+23	 0	 2	[/m^3]
+Nd(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+absorption grading :	  670.26	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 7.352e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : TJ
+d : 5.000e-08 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    13.000000	    10.000000	    10.000000	    10.000000	    10.000000	    13.000000	    13.000000	 1	 0	[-]
+chi :	  4.100000	  4.500000	  1.000000	  1.000000	  1.000000	  4.100000	  4.100000	 1	 0	[eV]
+Eg :	  1.400000	  1.200000	  0.500000	  1.000000	  1.000000	  1.400000	  1.400000	 1	 0	[eV]
+Nc :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 0	[/m^3]
+Nv :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 0	[/m^3]
+mu_n :	 1.000000e-01	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-01	 1.000000e-01	 1	 0	[m^2/Vs]
+mu_p :	 1.000000e-01	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-01	 1.000000e-01	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	 0	 2	[/m^3]
+absorption grading :	  885.70	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 8.452e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : GaAs
+d : 2.000e-06 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	    13.100000	    10.000000	    10.000000	    10.000000	    10.000000	    13.100000	    13.100000	 1	 0	[-]
+chi :	  4.070000	  4.500000	  1.000000	  1.000000	  1.000000	  4.070000	  4.070000	 1	 0	[eV]
+Eg :	  1.420000	  1.200000	  0.500000	  1.000000	  1.000000	  1.420000	  1.420000	 1	 0	[eV]
+Nc :	 4.700000e+23	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 4.700000e+23	 4.700000e+23	 1	 0	[/m^3]
+Nv :	 1.040000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.040000e+25	 1.040000e+25	 1	 0	[/m^3]
+mu_n :	 8.500000e-01	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 8.500000e-01	 8.500000e-01	 1	 0	[m^2/Vs]
+mu_p :	 4.000000e-02	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 4.000000e-02	 4.000000e-02	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+23	 1.000000e+23	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+23	 1.000000e+23	 0	 2	[/m^3]
+absorption grading :	  873.22	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 8.392e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : HTL
+d : 1.000e-07 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	     3.000000	    10.000000	    10.000000	    10.000000	    10.000000	     3.000000	     3.000000	 1	 0	[-]
+chi :	  2.450000	  4.500000	  1.000000	  1.000000	  1.000000	  2.450000	  2.450000	 1	 0	[eV]
+Eg :	  3.000000	  1.200000	  0.500000	  1.000000	  1.000000	  3.000000	  3.000000	 1	 0	[eV]
+Nc :	 2.200000e+24	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 2.200000e+24	 2.200000e+24	 1	 0	[/m^3]
+Nv :	 1.800000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e+25	 1.800000e+25	 1	 0	[/m^3]
+mu_n :	 2.000000e-08	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.000000e-08	 2.000000e-08	 1	 0	[m^2/Vs]
+mu_p :	 2.000000e-08	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.000000e-08	 2.000000e-08	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 1.000000e+24	 1.000000e+24	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+24	 1.000000e+24	 0	 2	[/m^3]
+Nd(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+absorption grading :	  413.33	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 5.774e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+interface properties
+
+interfacename : 
+Intraband tunneling : 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+layer
+
+name : FTO
+d : 3.000e-07 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	 0	 0	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	 0	 0	[m/s]
+eps :	     9.000000	    10.000000	    10.000000	    10.000000	    10.000000	     9.000000	     9.000000	 1	 0	[-]
+chi :	  4.000000	  4.500000	  1.000000	  1.000000	  1.000000	  4.000000	  4.000000	 1	 0	[eV]
+Eg :	  3.500000	  1.200000	  0.500000	  1.000000	  1.000000	  3.500000	  3.500000	 1	 0	[eV]
+Nc :	 2.200000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 2.200000e+25	 2.200000e+25	 1	 0	[/m^3]
+Nv :	 1.800000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.800000e+25	 1.800000e+25	 1	 0	[/m^3]
+mu_n :	 2.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 2.000000e-03	 2.000000e-03	 1	 0	[m^2/Vs]
+mu_p :	 1.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 1.000000e-03	 1.000000e-03	 1	 0	[m^2/Vs]
+Tunneling in layer: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+Relative hole mass :	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 1.000000e+00	 0	 0	[-]
+K_rad :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^3/s]
+c_n_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+c_p_auger :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 0	[m^6/s]
+Na(uniform) :	 0.000000e+00	 0.000000e+00	 1.000000e+01	 1.000000e+01	 1.000000e+01	 0.000000e+00	 0.000000e+00	 0	 2	[/m^3]
+Nd(uniform) :	 1.000000e+26	 1.000000e+26	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+26	 1.000000e+26	 0	 2	[/m^3]
+absorption grading :	  354.28	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	 7	 0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+A : 5.345e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorptionmodel pure A material (y=0) : from model
+absorption model A, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model A, value of parameter 1 :   1.000000e+05
+absorption model A, value of parameter 2 :   0.000000e+00
+absorption pure B material (y=1), model : coefficients A and B (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), A : 9.129e+06 [/(m*sqrt(eV))] (line inserted for compatibility with SCAPS until 3.3.06)
+pure B material (y=1), B : 0.000e+00 [sqrt(eV)/m] (line inserted for compatibility with SCAPS until 3.3.06)
+absorption pure B material (y=1), model : from model
+absorption model B, model : sqrt(hv-Eg) law (SCAPS traditional)
+absorption model B, value of parameter 1 :   1.000000e+05
+absorption model B, value of parameter 2 :   0.000000e+00
+
+
+front contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+03 [m/s]
+Tunneling to contact: 0 (0: no tunneling, 1: with tunneling)
+Relative electron mass :  1.00e+00
+Relative hole mass :  1.00e+00
+
+
+working point
+
+illuminated from : left
+internal Rfront :   1.00000000
+internal Tfront :  0.0000e+00
+voltage V applied to : -1 (+1: right contact; -1: left contact)
+cell reference system :  1 (1: as a consumer (consumed power = +VJ; 0: as a generator (generated power = +VJ) )

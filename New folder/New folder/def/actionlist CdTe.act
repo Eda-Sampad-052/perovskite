@@ -1,0 +1,43 @@
+> SCAPS version 2.9.03, August 2010, ELIS - UGent: 
+> SCAPS Action List file, saved on 	16-08-2010 at 16:58:03
+> no problem definition file loaded 
+> 
+
+Temperature :   300.00 K
+Voltage :     0.0000 V
+Frequency :   1.0000e+05 Hz
+Number of points :   5
+dark :  0
+generation from file :  0
+spectrum file :AM1_5G 1 sun.spe
+spectrum cut off :  0
+short wavelength cut off :     100.00 nm
+long wavelength cut off :  2000.00 nm
+neutral density :     0.0000
+transmission :   100.0000 %
+generation file :*.gen
+attenuation :   100.0000 %
+pause :  0
+IV_startV :     0.0000 V
+IV_stopV :     0.9000 V
+IV_points :  46
+IV_increment :     0.020000 V
+IV_calculate :  1
+stop after Voc :  1
+CV_startV :    -1.0000 V
+CV_stopV :     0.7000 V
+CV_points :  86
+CV_increment :     0.020000 V
+CV_calculate :  0
+Cf_startf :    1.000e+02 Hz
+Cf_stopf :    1.000e+06 Hz
+Cf_total points :  21
+Cf_points per decade :   5
+Cf_calculate :  0
+QE_startlambda :   300 nm
+QE_stoplambda :   900 nm
+QE_points :  61
+QE_increment :    10 nm
+QE_calculate :  0
+do batch calculation :  0
+do recording :  0

@@ -1,0 +1,26 @@
+# Optical cross section of an In impurity in Si, for electrons.
+# Data taken from 
+# M.J. Keevers and M.A. Green, Efficiency improvements of silicon solar cells by impurity photovoltaic effect, 
+# J. Appl. Phys 75 (1994) 4022-4031.
+# By Samira Khelifi, U. Béchar and U. Gent, 2005		
+# Lambda[nm]	sigma_n[m^2]
+# 
+1100	8.703E-22
+1150	7.037E-22
+1200	4.810E-22
+1250	1.111E-22
+1300	7.400E-23
+1350	1.850E-23
+1400	0.00E+00
+1450	0.00E+00
+1500	0.00E+00
+1550	0.00E+00
+1600	0.00E+00
+1650	0.00E+00
+1700	0.00E+00
+1750	0.00E+00
+1800	0.00E+00
+1850	0.00E+00
+1900	0.00E+00
+1950	0.00E+00
+2000	0.00E+00

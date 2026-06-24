@@ -1,0 +1,92 @@
+// Example of a SCAPS script file
+// Marc B. 24-8-2010 and adapted 20-5-2011
+// MB 19-12-2020: works as usual, when only addressing variables x, y, z, u, v, w and rundll scapsuserfunction
+// when you want to extend, and use more script variables a... z, you should use rundll scapsuserfunction26
+// ... and write something meaningfull in this dll: for the moment, as installed with SCAPS3.3.9, this dll is empty
+// ... and waits for the user to be written...
+
+// you can use several markers for comments: //, or > or < , or ...
+
+set errorhandling.toscreen  // the default in a script is "overwrite file", this is SCAPSErrorLogFile.log in the scaps directory
+
+load definitionfile Numos Exercise 1.def
+// start from a well defined condition
+
+// you can load an appropriate action file (that you prepared before)
+load actionlistfile actionlist CIGS.act
+// or you can set the actions here
+clear all
+clear actions
+action iv.doiv
+action iv.startv 0
+action iv.stopv 1
+action iv.stopaftervoc 1
+action light
+
+set scriptvariable.mode 1              // means find a root (here Voc(T) = 0.5 V), the variable (here T) is of "linear nature"
+set scriptvariable.yvalue 0.5000       // the desired value 
+set scriptvariable.xvector[0] 300      // two initial guesses of the parameter
+set scriptvariable.xvector[1] 320
+set scriptvariable.xvector[2] 320
+
+set scriptvariable.xname T (K)
+set scriptvariable.yname Voc (V)
+set scriptvariable.zname |error|
+
+// determine Voc for the 3 initial guesses
+// this could be done in a short loop, instead of doing it explicitly one by one
+// (see script "which Nt gives Voc=0.500V.script)
+action workingpoint.temperature xvector[0]   // assign the parameter to T
+calculate
+get characteristics.voc  yvector[0]    // assign Voc to yvector[0]           
+action workingpoint.temperature xvector[1]   // and the same for the second guess
+calculate
+get characteristics.voc  yvector[1]
+action workingpoint.temperature xvector[1]   // and the same for the second guess
+calculate
+get characteristics.voc  yvector[2]
+
+// the main loop to find T
+loop maxiteration 10                   // do not exagerate
+loop maxerror     1e-5                 // do not exagerate
+
+loop start                             // start the iteration to find the root
+
+rundll scapsuserfunction       // the dll delivered with SCAPS        
+
+// it looks only to xvector and yvector [0] and [1] to find a better guess to make y = yvalue
+// the function returns xvalue as a better guess for the variable
+// set this to T
+action workingpoint.temperature xvalue    
+// place this better guess on xvector[0] (and push the rest upward)               
+set scriptvariable.xvector xvalue      
+
+calculate
+
+// places the new Voc in yvector[0] and pushes the rest up
+get characteristics.voc  yvector
+
+// you can comment the show command below out when it runs to your satisfaction       
+// show scriptvariables                   
+
+loop stop
+
+// determine the error
+math constant ZYy // sets a Z vector with as many elements as Y, and with all elements = yvalue (= 0.5 V here)
+math vectorsubtract ZYZ // now Z contains the error acual Voc - desired Voc
+math vectorabs ZZ // now Z contains the |error|
+set scriptvariable.zname |error| (V)
+
+show scriptvariables                   
+plot draw xy // to show how SCAPS dwelled around to find the exact Voc
+plot drawversusindex Z  // to show how the accuracy improves in course of the iterations
+save results.iv test save iv.iv         
+
+// now the value of T that has made Voc = 0.5 V is in the action panel, not saved
+// you could find it safer to save the problem in an action file (now commented out)
+
+// save settings.actionlistfile script Voc test.action
+
+// set quitscript.interactiveSCAPS      // this is the default when leaving the script
+// set quitscript.quitSCAPS             // you might prefer to leave SCAPS 
+

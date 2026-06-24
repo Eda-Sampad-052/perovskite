@@ -1,0 +1,85 @@
+// Example of a SCAPS script file
+// Marc B. 24-8-2010 and adapted 27-5-2011
+// MB 19-12-2020: works as usual, when only addressing variables x, y, z, u, v, w and rundll scapsuserfunction
+// when you want to extend, and use more script variables a... z, you should use rundll scapsuserfunction26
+// ... and write something meaningfull in this dll: for the moment, as installed with SCAPS3.3.9, this dll is empty
+// ... and waits for the user to be written...
+
+set errorhandling.toscreen 
+
+load definitionfile Numos Exercise 1.def
+
+// to start from a well defined condition
+clear all
+clear actions 
+action iv.doiv
+action iv.startV 0.0
+action iv.stopV 0.7
+action iv.increment 0.02
+action iv.stopaftervoc 1
+
+action light
+
+
+set scriptvariable.mode 3             // means find a maximum (here Jsc(d) = 0.5 V), the variable (here d) is of "linear nature"
+math filllinear x 0.5 1.5 3 // three initial guesses of the parameter d are 0.5 µm, 1.0 µm and 1.5 µm
+
+// take care of the output : set appropriate names
+set scriptvariable.xname d (µm)
+set scriptvariable.yname Jsc (mA/cm2)
+set scriptvariable.zname error (mA/cm2)
+
+// assign the parameter to d and calculate the function Jsc
+// do so for the 3 guesses
+set scriptvariable.maxiteration 3
+loop start
+set layer1.thickness xvector[loopcounter]   
+calculate
+get characteristics.jsc  yvector[loopcounter]   
+set scriptvariable.zvector[loopcounter] yvector[loopcounter]    // z will contain the error (correction to d) just take d for the 3 first elements       
+loop stop
+
+// the main iteration
+loop maxiteration 10             // do not exagerate
+loop maxerror     1e-5            // do not exagerate; it should be compared to a Jsc of about 30 mA/cm2
+
+loop start                             // start the iteration to find the root
+
+// use the dll dellivered with SCAPS
+
+rundll scapsuserfunction               
+
+// it looks only to xvector and yvector [0], [1] and [2] to find a better guess to make y = maximal
+// the function returns xvalue as a better guess for the variable
+// set this to d
+// then place this better guess on xvector[0] (and push the rest upward)               
+
+set layer1.thickness xvalue 
+set scriptvariable.xvector xvalue      
+
+calculate
+
+// places the new Voc in yvector[0] and pushes the rest up
+get characteristics.Jsc  yvector
+set scriptvariable.zvector looperror // looperror has been set in the dll to the correction (ynew-yold)
+
+// you can comment the show command below out when it runs to your satisfaction       
+// show scriptvariables                   
+
+loop stop
+
+show scriptvariables 
+
+plot draw xy // to show how SCAPS dwelled around to find the maximal Jsc
+math vectorabs zz // take the absolute value of the correction: |Jsc,new - Jsc,old| (better in a log plot :-) )
+plot drawversusindex z // to show how the correction decreases with the number of iterations
+plot drawversusindex x // how you evoluate to the optimum d
+plot drawversusindex y // how you evoluate to the maximum Jsc
+
+// now the value of d that has made Jsc maximal is in the internal problem definition, not saved
+// you could find it safer to save the problem in a def file (now commented out)
+// save definitionfile script Voc test.def
+// save results.iv test save iv.iv  
+
+
+

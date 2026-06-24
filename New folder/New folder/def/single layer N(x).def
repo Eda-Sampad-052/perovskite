@@ -1,0 +1,93 @@
+> SCAPS version 2.8.02, 18 may 2009, ELIS - UGent: Problem definition file
+> last saved by SCAPS: 	22-05-2009 at 10:01:15
+> 
+> Problem definition file distributed with SCAPS2.8, may 2009
+> A diode is imlemented in an otherwise unifrom n-type layer
+> by setting a position dependent NA(x) doping density, with an eponentially decaying profile.
+> When the thickness is varied (e.g. in the batch mode, d = 2 to 20 micrometer)
+> the I-V curves change, but the C-V curves do not, since the doping densities in the
+> front region of the cell do not vary (the exponential NA(x) profile is decayed after about 1 micrometer)
+> 
+convergence
+
+clamp_psi :  5.00e-01 units kT
+clamp_n :  5.00e-01 units kT
+clamp_p :  5.00e-01 units kT
+termination_psi :  1.00e-03 units kT
+termination_Fn :  1.00e-03 units kT
+termination_Fp :  1.00e-03 units kT
+maxiter :   250
+QE calculation mode:  1 (0: cst. # of photons, 1: cst. incident power)
+number of photons :  1.00e+19
+incident power :  1.00e+01
+recalculate mesh :  0 (0: fixed mesh, 1: adaptive mesh)
+maximum ratio between neighbouring points :  1.60e+00
+minimum ratio between neighbouring points :  1.05e+00
+generation limit :  1.00e+00 microA/cm2
+recombination limit :  1.00e-03 microA/cm2
+Mott-Schottky analysis epsilon of sheet # :  0
+Mott-Schottky analysis epsilon of sheet side :  1	(left side = -1; right side = +1)
+Mott-Schottky analysis number of points :  3	(3 or 5 as of december 2008)
+Mott-Schottky analysis polynomial order middle :  2	(1 or 2 as of december 2008)
+Mott-Schottky analysis polynomial order edges:  1	(1 or 2 as of december 2008)
+
+
+back contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn :  1.000e+03 [m/s]
+Sp :  1.000e+05 [m/s]
+
+layer
+
+name : single layer with NA(x)
+d : 2.000e-06 [m]
+composition grading :	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	  0.00000	0	1	[-]
+v_th_n :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	0	0	[m/s]
+v_th_p :	 1.000e+05	 1.000e+05	 1.000e+01	 1.000e+01	 1.000e+01	 1.000e+05	 1.000e+05	0	0	[m/s]
+eps :	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	    10.000000	0	0	[-]
+chi :	  4.500000	  4.500000	  1.000000	  1.000000	  1.000000	  4.500000	  4.500000	0	0	[eV]
+Eg :	  1.200000	  1.200000	  0.500000	  1.000000	  1.000000	  1.200000	  1.200000	0	0	[eV]
+Nc :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	0	0	[/m^3]
+Nv :	 1.000000e+25	 1.000000e+25	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+25	 1.000000e+25	0	0	[/m^3]
+mu_n :	 5.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 5.000000e-03	 5.000000e-03	0	0	[m^2/Vs]
+mu_p :	 5.000000e-03	 5.000000e-03	 1.000000e-03	 1.000000e+00	 1.000000e+00	 5.000000e-03	 5.000000e-03	0	0	[m^2/Vs]
+Na(x) :	 1.000000e+21	 1.000000e+21	 1.000000e+19	 2.000000e-01	 1.000000e+01	 1.000000e+23	 1.000000e+19	4	1	[/m^3]
+Nd(y) :	 1.000000e+21	 1.000000e+21	 1.000000e+01	 1.000000e+01	 1.000000e+01	 1.000000e+21	 1.000000e+21	0	0	[/m^3]
+absorption grading :	 1033.31	 1033.31	  250.00	  250.00	    0.00	    1.20	    1.20	7	0	[nm]
+absorptionmodel pure A material (y=0) : coefficients A and B
+A : 1.000e+07 [/(m*sqrt(eV))]
+B : 1.000e+07 [sqrt(eV)/m]
+absorption pure B material (y=1), model : coefficients A and B
+pure B material (y=1), A : 1.000e+07 [/(m*sqrt(eV))]
+pure B material (y=1), B : 1.000e+07 [sqrt(eV)/m]
+
+srhrecombination
+
+type : neutral
+sigma_n : 1.000e-17 [m^2]
+sigma_p : 1.000e-17 [m^2]
+energy distribution : single
+Reference for defect energy :  1 ; 0 = above EV (SCAPS<2.7); 1 = above Ei; 2 = below EC
+Et :   0.000 [eV]
+Ekar :  0.1000 [eV]
+Nt(y) :	 1.000e+19	 1.000e+19	 1.000e+20	 1.000e+00	 1.000e+00	 1.000e+19	 1.000e+19	0	0	[1/cm3]
+profile : homogenous
+Lkar : 1.000e+00 [m]
+Nleft : 1.000e+19 [/m^3]
+Nright : 1.000e+19 [/m^3]
+
+
+front contact
+
+flatband : 1 (1: flatband contact imposed; 0: fixed Phi_m value)
+recalculate : 1 (1 = do or 0 = do not recalculate phi_m to set flatband in each batch step)
+Sn : 1.000e+05 [m/s]
+Sp : 1.000e+03 [m/s]
+
+working point
+
+illuminated from : left
+internal Rfront :   1.00000000
+internal Tfront :  0.0000e+00

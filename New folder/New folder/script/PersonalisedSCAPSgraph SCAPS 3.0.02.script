@@ -1,0 +1,73 @@
+// Example script SCAPS 2.10.3
+// KD ELIS-Ugent 3-2011 
+// MB 20-5-2011 adapted to the more comfortable SCAPS 3.0.02 features
+// MB 19-12-2020 adapted to illustrate the use of more SCAPS variables
+// The free carrier density profiles and the shallow acceptor profile are recorded for different temperatures
+// The free hole density is compared with the free electron density and the shallow acceptor density
+// The results are plotted
+// This script uses the get command to retrieve n(x) and p(x) at the final point of the iv calculation (here 0 V)
+// it uses also the get function to retrieve NA: this works only if there is no grading
+// (otherwise, NA(x) should be retrieved via the recorder: see script PersonalisedSCAPSgraph.script )
+
+set errorhandling.toscreen
+
+// to start from a well defined condition
+clear all 
+action dark // you can also set it to light, and look to the difference
+clear actions
+action iv.checkaction 0 // do not do an IV (not necessary to calculate n(x) and p(x) since a few years)
+action iv.startv 0
+action iv.stopv 0
+action iv.points 2
+
+//load all files of interest
+//definition file (this can be omitted when the script is run from the user interface and a definition file was already loaded)
+load definitionfile  Numos CIGS baseline.def        
+
+//construction tvector (holds Temperatures)
+math filllinear t 260 360 6 // thus: 260, 280, 300, 320, 340 and 360 K
+
+// get the acceptor density NA
+// this works only for a non-graded structure
+// if the structure is graded, you should retrieve NA(x) from the recorder (see other script examples)
+get layer1.na avalue
+// show scriptvariables 
+
+// take care of a nice output
+// set scriptvariable.xname x (µm) // automatically done by get  get energybands.n x
+set scriptvariable.vname p/n (#)
+set scriptvariable.uname p/NA (cm-3)
+set scriptvariable.aname NA (cm-3)
+
+//set loop properties
+loop  maxiteration 5 //loop from 0 to 5: maximum indexed subscript will be 5
+
+//beginning of the loop
+loop start
+
+action    workingpoint.Temperature tvector[loopcounter]  //set new temperature
+calculate singleshot 
+
+//access data
+get energybands.n xn // xvector xontains x, nvector contains n(x), names are set auto.
+get energybands.p xp // xvector xontains x, pvector contains p(x), names are set auto.
+math constant axa // makes an avector with the same length as xvector, and fills it with avalue (=NA)
+
+//do some math with the n and p densities
+math divide  vpn // vvector = pvector/nvector -> p/n
+math divide  upa // uvector = pvector/avector -> p/NA
+
+//plot results
+// the special, "custom" plots
+plot  draw xv // ratio p/n (x)
+plot draw pn // p(n) // a not so common plot: hole/electron ratio over the cell depth
+plot draw pu // p/NA(x)
+// and traditional plots
+plot draw xp // p(x): profile of hole density
+plot draw xn // n(x) profile of electron density
+
+loop stop
+//end of the loop
+
+//end of script
+

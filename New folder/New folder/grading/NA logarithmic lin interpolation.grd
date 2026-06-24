@@ -1,0 +1,13 @@
+Test file filegrading MB, 30-8-2013
+Example of a grading file for a property graded as a function of composition or position
+Can be used for a doping density (ND or NA) or a defect density Nt
+The first column can be the composition (when e.g. NA(y) is set in SCAPS) or the position in micrometer (when NA(x) is set in SCAPS)
+The second column is a doping (or defect) density in 1/m3
+In this example: NA(y) = (9^y) * 1.0E21 (thus linear in a log(NA) vs. y diagram)
+Only 3 points are specified to illustrate the effect of the interpolation law (lin or log)
+Interpolation: linear  (this is the key word for SCAPS)
+
+x (micrometer) or composition y	NA (1/m3)
+0.0	1.0E21
+0.5	3.0E21
+1.0	9.0E21

@@ -1,0 +1,13 @@
+> SCAPS version 3.1.01 Beta, 8-7-2011, ELIS - UGent: 
+> SCAPS Scale settings file, saved on 	25-08-2011 at 15:08:29
+> problem definition file loaded :
+> c:\Koen\Scaps\SCAPS_3101_werkversie\def\testrecorder.def
+> last saved: 	24-08-2011 at 11:51:47
+> This one is suited for an illuminated IV curve of a CIGS cell
+
+xaxis mode : 1 // 0 is auto scaling, 1 is manual scaling 
+xaxis minimum :    0.0 // in Volt
+xaxis maximum :    0.8 // Volt
+yaxis mode : 1 // 0 is auto scaling, 1 is manual scaling
+yaxis minimum :    -40 // mA/cm2
+yaxis maximum :    20 // mA/cm2

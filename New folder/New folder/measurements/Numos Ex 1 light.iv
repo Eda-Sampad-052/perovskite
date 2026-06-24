@@ -1,0 +1,59 @@
+NUMOS workshop - Gent		
+Numerical Modelling of Thin Film Solar Cells			
+Marc Burgelman, friday 30 march 2007
+illuminated IV-"measurement" at 1 MHz					
+(the measurement is a simulation with problem definition file "Numos Exercise 1.def")
+
+cell area: 1 cm2					
+units: V: Volt ; I: mA					
+measurement conditions:					
+T(K)	300				
+V(V)	from 0 to +0.62 Volt				
+f(kHz)	n.a.				
+illumination:	dark				
+Neutral density filters: none					
+spectrum cut off:	none							
+
+V (Volt)	I (mA)				
+0.00	-3.21E+01
+0.02	-3.20E+01
+0.04	-3.19E+01
+0.06	-3.18E+01
+0.08	-3.18E+01
+0.10	-3.17E+01
+0.12	-3.16E+01
+0.14	-3.15E+01
+0.16	-3.14E+01
+0.18	-3.13E+01
+0.20	-3.11E+01
+0.22	-3.10E+01
+0.24	-3.08E+01
+0.26	-3.06E+01
+0.28	-3.04E+01
+0.30	-3.01E+01
+0.32	-2.96E+01
+0.34	-2.89E+01
+0.36	-2.79E+01
+0.38	-2.63E+01
+0.40	-2.38E+01
+0.42	-1.98E+01
+0.44	-1.35E+01
+0.46	-3.69E+00
+0.48	1.16E+01
+0.50	3.46E+01
+0.52	6.85E+01
+0.54	1.16E+02
+0.56	1.82E+02
+0.58	2.71E+02
+0.60	3.90E+02
+0.62	5.53E+02
+
+solar cell parameters deduced from calculated IV-curve:		
+Voc =	0.466	Volt
+Jsc =	32.077	mA/cm2
+FF =	67.22	%
+eta =	10.04	%
+
+
+
+

@@ -1,0 +1,25 @@
+/absorption data ZnO taken from S. Adachi
+/"Optical constants of crystalline and amorphous semiconductors"
+/pp.426-428  (for E perpendicular to c)
+/lambda[nm]	alfa[m^-1]
+206.6	2.20E+07
+248.0	2.10E+07
+275.5	1.90E+07
+310.0	1.70E+07
+317.9	1.70E+07
+326.3	1.70E+07
+335.1	1.70E+07
+344.4	1.70E+07
+354.2	1.70E+07
+364.6	1.90E+07
+370.1	2.00E+07
+372.3	2.00E+07
+375.7	1.70E+07
+381.5	8.80E+06
+387.4	3.50E+06
+393.6	8.40E+05
+399.9	4.10E+05
+406.5	2.60E+05
+413.3	1.80E+05
+420.3	9.20E+04
+425.0   1.00E+00

@@ -1,0 +1,48 @@
+NUMOS workshop - Gent		
+Numerical Modelling of Thin Film Solar Cells			
+Marc Burgelman, friday 30 march 2007
+dark IV-"measurement" at 1 MHz					
+(the measurement is a simulation with problem definition file "Numos Exercise 1.def")
+
+cell area: 1 cm2					
+units: V: Volt ; I: mA					
+measurement conditions:					
+T(K)	300				
+V(V)	from 0 to +0.86 Volt				
+f(kHz)	n.a.				
+illumination:	dark				
+Neutral density filters: none					
+spectrum cut off:	none				
+V (Volt)	I (mA)				
+0.00	0.00E+00
+0.02	2.31E-04
+0.04	5.93E-04
+0.06	1.18E-03
+0.08	2.17E-03
+0.10	3.83E-03
+0.12	6.63E-03
+0.14	1.13E-02
+0.16	1.91E-02
+0.18	3.18E-02
+0.20	5.24E-02
+0.22	8.53E-02
+0.24	1.38E-01
+0.26	2.22E-01
+0.28	3.56E-01
+0.30	5.70E-01
+0.32	9.13E-01
+0.34	1.47E+00
+0.36	2.36E+00
+0.38	3.80E+00
+0.40	6.13E+00
+0.42	9.86E+00
+0.44	1.58E+01
+0.46	2.53E+01
+0.48	4.00E+01
+0.50	6.23E+01
+0.52	9.51E+01
+0.54	1.42E+02
+0.56	2.06E+02
+0.58	2.93E+02
+0.60	4.09E+02
+0.62	5.68E+02

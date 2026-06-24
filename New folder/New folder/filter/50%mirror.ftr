@@ -1,0 +1,6 @@
+/ optical filter representing 50% Transmission or Reflection for all lambda
+/ if used at the illuminated side: the data are interpreted as transmission
+/ if used at the rear side       : the data are interpreted as reflection
+/lambda[nm]	optical T or R [%]
+0	50
+10000	50

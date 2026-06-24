@@ -1,0 +1,13 @@
+
+
+handling of error messages :  0 ; 0=to screen and wait for ackowledgement; 1=append to log file; 2=overwrite log file
+handling of inter/extra-polation errors :  0 ; 0=proceed without warning; 1=give warning then proceed
+output list after a convergence error :  0 ; 0=truncate; 1=fill with zero's; 2=fill with white space
+maximum voltage for the recording of solar cell characteristics (V) :     2.000000
+minimum voltage increment for the recording of solar cell characteristics (V) :   0.02000000
+number of energy levels in a distribution :  7 (a defect band is discretised into  separate single levels)
+Shockley-Queisser limit :  0 (0: never; 1: if necessary; 2: always)
+width of energy distribution with a tail (a multiple of Echar) :   7.0000 (a defect band is discretised into  separate 
+width of gaussian energy distribution (a multiple of Echar) :   6.0000 (a defect band is discretised into  separate sin
+
+>> end of general SCAPS settings file

@@ -1,0 +1,15 @@
+> A generation file made by hand
+> Mimicking a delta-function generation function at x = 1.5 µm in simple pn.def, 0.1 µm wide
+> The total generation corresponds to the SCAPS calculation of AM1_5G 1 sun.spe incident on simple pn.def
+> The surface under the rectangle yields the total G
+> MB 28-3-2011
+>
+> x (µm)	Geh (#/m3.s)
+0	0
+1.44	0
+1.45	1.2125E28
+1.46	2.4250E28
+1.54	2.4250E28
+1.55	1.2125E28
+1.56	0
+2.5	0
