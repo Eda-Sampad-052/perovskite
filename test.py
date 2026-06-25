@@ -37,7 +37,7 @@ def demonstrate_script_generation():
     print("1. SCAPS SCRIPT GENERATION")
     print("="*60)
     
-    def_file = os.path.join(ScapsConfig.DEF_DIR, "Cs2PtI6 Ag2MgGeS4.def")
+    def_file = os.path.join(ScapsConfig.DEF_DIR, "Cs4CuSb2Cl12.def")
     
     print(f"\nGenerating IV curve script for: {def_file}")
     script_content = ScapsScriptGenerator.generate_iv_curve_script(def_file)

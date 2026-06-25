@@ -36,7 +36,7 @@ class ScapsConfig:
     # SCAPS simulation parameters
     DEFAULT_TEMP = 300  # Temperature in K
     IV_START_V = 0.0
-    IV_STOP_V = 1.5
+    IV_STOP_V = 3.0
     IV_INCREMENT = 0.01
 
 
