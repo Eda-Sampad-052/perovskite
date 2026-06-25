@@ -1,0 +1,42 @@
+name: Run SCAPS on Windows
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Scaps3312/**'
+      - 'test2.py'
+
+jobs:
+  run-scaps:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Validate SCAPS executable exists
+        shell: pwsh
+        run: |
+          $scaps = Join-Path $env:GITHUB_WORKSPACE 'New folder\New folder\scaps3312.exe'
+          if (-not (Test-Path $scaps)) { Write-Error "scaps3312.exe not found at $scaps"; exit 1 }
+          Write-Host "Found SCAPS at $scaps"
+
+      - name: Run SCAPS via test2.py
+        shell: pwsh
+        run: |
+          $scaps = Join-Path $env:GITHUB_WORKSPACE 'New folder\New folder\scaps3312.exe'
+          $env:SCAPS_EXE = $scaps
+          $def = Join-Path $env:GITHUB_WORKSPACE 'Scaps3312\def\Cs2PtI6 Ag2MgGeS4.def'
+          Write-Host "Using SCAPS_EXE=$env:SCAPS_EXE"
+          python $env:GITHUB_WORKSPACE\test2.py $def
+
+      - name: Upload SCAPS results
+        uses: actions/upload-artifact@v4
+        with:
+          name: scaps-results
+          path: Scaps3312/results/**
