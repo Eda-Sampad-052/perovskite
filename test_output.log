@@ -1,0 +1,26 @@
+SCAPS Workflow Runner
+==================================================
+Expected Results:
+  VOC: 1.1709 V
+  JSC: 32.071 mA/cm²
+  PCE: 89.5 %
+  FF: 33.61 %
+==================================================
+
+Running SCAPS simulation for: Cs2PtI6 Ag2MgGeS4.def
+Script created: /tmp/tmpz5ib233e.script
+SCAPS returned error code: 53
+
+==================================================
+Results for Cs2PtI6 Ag2MgGeS4.def:
+==================================================
+VOC (V):  None
+JSC (mA/cm²): None
+FF (%):   None
+PCE (%):  None
+==================================================
+
+
+Comparison with Expected Results:
+==================================================
+==================================================
