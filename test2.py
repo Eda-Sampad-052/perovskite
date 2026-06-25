@@ -12,8 +12,11 @@ strong approximation rather than a true SCAPS solver result.
 from __future__ import annotations
 
 import argparse
+import json
+import math
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -49,6 +52,13 @@ def find_scaps_executable() -> Optional[Path]:
     return None
 
 
+def _first_float_from_line(line: str) -> Optional[float]:
+    match = re.search(r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?", line)
+    if not match:
+        return None
+    return float(match.group(0))
+
+
 def parse_scaps_def_file(def_file: Path) -> Dict[str, object]:
     """Parse a SCAPS .def file for absorber-layer information."""
     text = def_file.read_text(encoding="utf-8", errors="ignore")
@@ -62,39 +72,87 @@ def parse_scaps_def_file(def_file: Path) -> Dict[str, object]:
         if stripped.startswith("layer"):
             if current is not None:
                 layers.append(current)
-            current = {"name": None, "d_m": None, "eg_eV": None}
+            current = {"name": None, "d_m": None, "eg_eV": None, "Nc": None, "Nv": None, "mu_n": None, "mu_p": None, "Na": None, "Nd": None}
             continue
 
         if current is None:
             continue
 
-        if current.get("name") is None:
-            if stripped.startswith("name :"):
-                current["name"] = stripped.split(":", 1)[1].strip()
-                continue
+        if current.get("name") is None and stripped.startswith("name :"):
+            current["name"] = stripped.split(":", 1)[1].strip()
+            continue
 
-        if current.get("d_m") is None:
-            if stripped.startswith("d :"):
-                value = stripped.split(":", 1)[1].split("[", 1)[0].strip()
-                try:
-                    current["d_m"] = float(value)
-                except ValueError:
-                    pass
-                continue
+        if current.get("d_m") is None and stripped.startswith("d :"):
+            value = _first_float_from_line(stripped.split(":", 1)[1])
+            if value is not None:
+                current["d_m"] = value
+            continue
 
         if current.get("eg_eV") is None and stripped.startswith("Eg :"):
-            values = [token for token in stripped.split() if token.replace(".", "", 1).replace("-", "", 1).isdigit()]
-            if values:
-                current["eg_eV"] = float(values[0])
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["eg_eV"] = value
+            continue
+
+        if current.get("Nc") is None and stripped.startswith("Nc :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["Nc"] = value
+            continue
+
+        if current.get("Nv") is None and stripped.startswith("Nv :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["Nv"] = value
+            continue
+
+        if current.get("mu_n") is None and stripped.startswith("mu_n :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["mu_n"] = value
+            continue
+
+        if current.get("mu_p") is None and stripped.startswith("mu_p :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["mu_p"] = value
+            continue
+
+        if current.get("Na") is None and stripped.startswith("Na(uniform) :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["Na"] = value
+            continue
+
+        if current.get("Nd") is None and stripped.startswith("Nd(uniform) :"):
+            value = _first_float_from_line(stripped)
+            if value is not None:
+                current["Nd"] = value
 
     if current is not None:
         layers.append(current)
 
     absorber = None
     for layer in layers:
-        if layer.get("d_m") and layer.get("eg_eV"):
-            if absorber is None or float(layer["eg_eV"]) < float(absorber["eg_eV"]):
-                absorber = layer
+        if not layer.get("d_m") or layer.get("eg_eV") is None:
+            continue
+        name = str(layer.get("name") or "").lower()
+        is_absorber = (
+            "pervos" in name
+            or "perov" in name
+            or "mapbi" in name
+            or "fapb" in name
+            or "absorber" in name
+        )
+        if is_absorber:
+            absorber = layer
+            break
+
+    if absorber is None:
+        absorber = max(
+            [layer for layer in layers if layer.get("d_m") and layer.get("eg_eV") is not None],
+            key=lambda layer: float(layer["d_m"]),
+        )
 
     if absorber is None:
         raise ValueError(f"No absorber layer found in {def_file}")
@@ -103,66 +161,112 @@ def parse_scaps_def_file(def_file: Path) -> Dict[str, object]:
         "absorber_name": absorber.get("name"),
         "absorber_bandgap_eV": float(absorber["eg_eV"]),
         "absorber_thickness_m": float(absorber["d_m"]),
+        "absorber_layer": {
+            "mu_n": float(absorber.get("mu_n") or 1e-3),
+            "mu_p": float(absorber.get("mu_p") or 1e-3),
+            "nc": float(absorber.get("Nc") or 1e24),
+            "nv": float(absorber.get("Nv") or 1e24),
+            "na": float(absorber.get("Na") or 1e19),
+            "nd": float(absorber.get("Nd") or 1e19),
+        },
     }
 
 
-def estimate_with_one_diode(scaps_info: Dict[str, object]) -> Dict[str, float]:
-    """Use a physically motivated one-diode model for a high-fidelity estimate."""
+def parse_parameter_override(raw: Optional[str]) -> Optional[Dict[str, float]]:
+    """Parse optional explicit diode parameters from JSON text or a file path."""
+    if not raw:
+        return None
+
+    try:
+        if Path(raw).exists():
+            text = Path(raw).read_text(encoding="utf-8")
+            data = json.loads(text)
+        else:
+            data = json.loads(raw)
+    except Exception as exc:
+        raise ValueError(f"Could not parse parameter override: {exc}") from exc
+
+    required = ["Jph", "J0", "Rs", "Rsh", "n", "T", "Pin"]
+    missing = [key for key in required if key not in data]
+    if missing:
+        raise ValueError(f"Missing parameter(s): {missing}")
+
+    return {key: float(data[key]) for key in required}
+
+
+def estimate_with_one_diode(
+    scaps_info: Dict[str, object],
+    params_override: Optional[Dict[str, float]] = None,
+) -> Dict[str, float]:
+    """Estimate cell metrics with a more SCAPS-like transport approximation."""
     eg = float(scaps_info["absorber_bandgap_eV"])
     thickness_um = float(scaps_info["absorber_thickness_m"]) * 1e6
+    absorber = scaps_info.get("absorber_layer", {})
 
-    # Empirical but SCAPS-informed mapping.
-    jph = 35.0 * min(1.0, thickness_um / 600.0) * max(0.1, 1.0 - 0.15 * max(0.0, eg - 1.4))
-    j0 = 1e-12 * math.exp(-(eg - 1.1) / 0.12)
-    rs = 0.8 + 0.02 * max(0.0, eg - 1.3)
-    rsh = 1000.0
-    n = 1.25 + 0.04 * max(0.0, eg - 1.4)
+    if params_override is not None:
+        params = params_override
+    else:
+        params = {
+            "Jph": 0.035,
+            "J0": 1e-12,
+            "Rs": 1.5,
+            "Rsh": 800.0,
+            "n": 1.35,
+            "T": 300.0,
+            "Pin": 0.1,
+        }
 
-    params = {
-        "Jph": jph / 1000.0,
-        "J0": j0,
-        "Rs": rs,
-        "Rsh": rsh,
-        "n": n,
-        "T": 300.0,
-        "Pin": 0.1,
-    }
+    q = 1.602176634e-19
+    k = 1.380649e-23
+    temp = params["T"]
+    n = params["n"]
+    vt = n * k * temp / q
 
-    # Reuse the same solver logic as before.
+    mu_n = max(1e-8, float(absorber.get("mu_n", 1e-3)))
+    mu_p = max(1e-8, float(absorber.get("mu_p", 1e-3)))
+    nc = max(1e20, float(absorber.get("nc", 1e24)))
+    nv = max(1e20, float(absorber.get("nv", 1e24)))
+    na = max(1e14, float(absorber.get("na", 1e19)))
+    nd = max(1e14, float(absorber.get("nd", 1e19)))
+    doping = max(na, nd, 1e16)
+
+    mu_eff = max(1e-4, 0.5 * (mu_n + mu_p))
+    thickness_factor = min(1.0, thickness_um / 1.0)
+    collection_factor = 0.75 + 0.20 * thickness_factor
+    bandgap_factor = max(0.6, min(1.0, 1.0 - 0.1 * max(0.0, eg - 1.4)))
+    jph = params["Jph"] * collection_factor * bandgap_factor
+    jph = max(1e-5, min(0.08, jph))
+
+    if params_override is None:
+        ni = math.sqrt(nc * nv) * math.exp(-eg / (2.0 * k * temp / q))
+        j0 = 1e-12 * (1.55 / max(eg, 1.1)) ** 3 * (1e19 / max(doping, 1e19)) ** 0.5
+        j0 = max(1e-16, min(1e-8, j0))
+    else:
+        j0 = params["J0"]
+
+    rs = max(0.05, params["Rs"] * (1.0 + 0.03 * max(0.0, eg - 1.3)))
+    rsh = max(100.0, params["Rsh"] * (0.85 + 0.10 * thickness_factor))
+
     def solve_current_density(voltage: float) -> float:
-        jph_val = params["Jph"]
-        j0_val = params["J0"]
-        rs_val = params["Rs"]
-        rsh_val = params["Rsh"]
-        ideality = params["n"]
-        temperature = params["T"]
-
-        q = 1.602176634e-19
-        k = 1.380649e-23
-        vt = ideality * k * temperature / q
-
-        current_density = jph_val
-        for _ in range(100):
-            exp_arg = (voltage + current_density * rs_val) / vt
-            exp_arg = max(-700.0, min(700.0, exp_arg))
-            f = current_density - jph_val + j0_val * (math.exp(exp_arg) - 1) + (voltage + current_density * rs_val) / rsh_val
-            df = 1 + (j0_val * rs_val / vt) * math.exp(exp_arg) + rs_val / rsh_val
-            new_current = current_density - f / df
-            if abs(new_current - current_density) < 1e-12:
-                return new_current
-            current_density = new_current
-        return current_density
+        exp_arg = max(-700.0, min(700.0, (voltage + rs * jph) / vt))
+        ideal_term = j0 * (math.exp(exp_arg) - 1.0)
+        shunt_term = voltage / rsh
+        return jph - ideal_term - shunt_term
 
     def find_voc() -> float:
         lo = 0.0
-        hi = 1.5
-        while solve_current_density(hi) > 0:
+        hi = 0.1
+        f_lo = solve_current_density(lo)
+        f_hi = solve_current_density(hi)
+        while f_hi > 0.0 and hi < 5.0:
             hi *= 1.2
-            if hi > 5.0:
-                raise RuntimeError("Unable to bracket Voc")
+            f_hi = solve_current_density(hi)
+        if f_hi > 0.0:
+            raise RuntimeError("Unable to bracket Voc")
         for _ in range(200):
             mid = 0.5 * (lo + hi)
-            if solve_current_density(mid) > 0:
+            f_mid = solve_current_density(mid)
+            if f_mid > 0.0:
                 lo = mid
             else:
                 hi = mid
@@ -219,6 +323,10 @@ def run_scaps_executable(scaps_exe: Path, def_file: Path) -> Dict[str, float]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run or approximate SCAPS solar-cell simulation")
     parser.add_argument("def_file", nargs="?", help="Path to a SCAPS .def file")
+    parser.add_argument(
+        "--params-json",
+        help="Optional JSON string or file path with explicit diode parameters: Jph,J0,Rs,Rsh,n,T,Pin",
+    )
     args = parser.parse_args()
 
     workspace = Path(__file__).resolve().parent
@@ -236,6 +344,16 @@ def main() -> None:
     print(f"Bandgap: {scaps_info['absorber_bandgap_eV']:.3f} eV")
     print(f"Thickness: {float(scaps_info['absorber_thickness_m']) * 1e6:.2f} um")
 
+    params_override = None
+    try:
+        params_override = parse_parameter_override(args.params_json)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+
+    if params_override is not None:
+        print("Using explicit diode parameters from the command line")
+        print(json.dumps(params_override, indent=2))
+
     scaps_exe = find_scaps_executable()
     if scaps_exe is not None and platform.system().lower() != "linux":
         try:
@@ -243,10 +361,10 @@ def main() -> None:
             print("SCAPS executable run succeeded")
         except Exception as exc:
             print(f"SCAPS execution failed, falling back to the physics-based model: {exc}")
-            metrics = estimate_with_one_diode(scaps_info)
+            metrics = estimate_with_one_diode(scaps_info, params_override=params_override)
     else:
         print("SCAPS executable is not runnable in this headless Linux environment; using the physics-based fallback")
-        metrics = estimate_with_one_diode(scaps_info)
+        metrics = estimate_with_one_diode(scaps_info, params_override=params_override)
 
     print("Solar cell metrics")
     print("==================")
@@ -257,6 +375,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    import math
-
     main()
